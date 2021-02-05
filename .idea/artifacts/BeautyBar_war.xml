@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BeautyBar:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>BeautyBar</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="BeautyBar-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="BeautyBar:war exploded" />
+    </root>
+  </artifact>
+</component>
