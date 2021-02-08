@@ -16,7 +16,7 @@
        <p><b>Email:</b>
        <p><input type="text" name="email" size="10"/></p>
        <p><b>Name and surname:</b>
-       <p><input type="text" name="name and surname" size="10"/></p>
+       <p><input type="text" name="name_and_surname" size="10"/></p>
        <p><b>Password:</b>
        <p><input type="password" name="password" size="10" /></p>
 

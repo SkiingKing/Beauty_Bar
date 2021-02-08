@@ -80,7 +80,7 @@ public class UserDAO extends DBManager {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String name = rs.getString("name_and_surname");
                 String password = rs.getString("password");
                 int role = rs.getInt("role");
 

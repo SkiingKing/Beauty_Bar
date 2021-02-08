@@ -17,7 +17,6 @@ public class Record {
 
     private Time ending_time;
 
-    private int price;
 
     public void setId(int id) {
         this.id = id;
@@ -31,6 +30,7 @@ public class Record {
         this.stage = stage;
     }
 
+
     public void setStatus_for_admin(boolean status_for_admin) {
         this.status_for_admin = status_for_admin;
     }
@@ -41,10 +41,6 @@ public class Record {
 
     public void setEnding_time(Time ending_time) {
         this.ending_time = ending_time;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
 
@@ -72,9 +68,7 @@ public class Record {
         return ending_time;
     }
 
-    public int getPrice() {
-        return price;
-    }
+
 
 
 

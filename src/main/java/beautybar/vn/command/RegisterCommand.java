@@ -2,7 +2,6 @@ package beautybar.vn.command;
 
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.UserDAO;
-import beautybar.vn.entity.Role;
 import beautybar.vn.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,7 @@ public class RegisterCommand implements Command {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String name_and_surname = request.getParameter("name and surname");
+        String name_and_surname = request.getParameter("name_and_surname");
 
 
 
