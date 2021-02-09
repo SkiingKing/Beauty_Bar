@@ -23,9 +23,15 @@ public class DaoFactory {
         return UserDAO.getInstance();
     }
 
+    public MasterDao getMasterDAO() {
+        return MasterDao.getInstance();
+    }
+
     public RecordDao getRecordDAO(){
         return RecordDao.getInstance();
     }
-
+    public ServicesDao getServicesDao(){
+        return ServicesDao.getInstance();
+    }
 
 }

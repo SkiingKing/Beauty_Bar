@@ -46,7 +46,7 @@ public class RecordDao extends DBManager {
     }
 
 
-    public int addRecord(Record record,Master master,Services services,User user) {
+    public int addRecord(Record record,Master master,Services services ) {
 
         Connection connection = null;
         PreparedStatement statement = null;

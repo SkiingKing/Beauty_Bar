@@ -1,3 +1,7 @@
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -23,9 +27,7 @@
         <p><input type="text" name="start_time" size="10"/></p>
         <p><b>Ending time:</b>
         <p><input type="text" name="ending_time" size="10" /></p>
-
-
-
+        
         <p><input type="submit" value="Send" /></p>
     </form>
 </div>

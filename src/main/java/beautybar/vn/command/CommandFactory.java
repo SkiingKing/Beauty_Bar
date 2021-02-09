@@ -25,7 +25,8 @@ public class CommandFactory {
         comands.put("logout", new LogoutCommand());
         comands.put("main", new MainCommand());
         comands.put("login", new LoginCommand());
-        comands.put("record",new RecordCommand());
+        comands.put("select",new RecordCommand());
+
 
     }
 

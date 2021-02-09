@@ -8,6 +8,17 @@ public class Master {
 
     private String email;
 
+    private String services;
+
+    private int rate;
+
+    public void setServices(String services) {
+        this.services = services;
+    }
+    public String getServices() {
+        return services;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -50,7 +61,7 @@ public class Master {
         return rate;
     }
 
-    private int rate;
+
 
 
 }

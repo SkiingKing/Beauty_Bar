@@ -3,11 +3,11 @@ package beautybar.vn.dao;
 import beautybar.vn.database.DBManager;
 
 
+import beautybar.vn.entity.Master;
 import beautybar.vn.entity.Services;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class ServicesDao extends DBManager {
 
@@ -15,8 +15,9 @@ public class ServicesDao extends DBManager {
 
     private Set<Services> allServices;
 
+
     private static final String FIND_SERVICE =
-            "SELECT name,price,estimat_time FROM services WHERE id=?";
+            "SELECT name FROM services";
 
     private ServicesDao() {
         allServices = new HashSet<Services>();
@@ -29,37 +30,29 @@ public class ServicesDao extends DBManager {
         return instance;
     }
 
-    public Services getService(int id) {
-        Services services = null;
-
+    public List<String> getService() {
         Connection connection = null;
         PreparedStatement statement = null;
+        List<String> list = new ArrayList<>();
 
         try {
             connection = getConnection();
             statement = connection.prepareStatement(FIND_SERVICE);
 
-            statement.setInt(1,id);
-
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()) {
-                int service_id = rs.getInt(1);
-                String service_name = rs.getString(2);
-                int price = rs.getInt(3);
-                Time estimat_time = rs.getTime(4);
+            while (rs.next()) {
+                String service_name = rs.getString("name");
 
-                services = new Services();
-                services.setId(service_id);
+                Services services = new Services();
                 services.setName_of_services(service_name);
-                services.setPrice(price);
-                services.setTime_of_service(estimat_time);
+                list.add(service_name);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return services;
-    }
 
+        return list;
+
+    }
 }
