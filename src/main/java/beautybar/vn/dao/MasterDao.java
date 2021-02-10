@@ -20,6 +20,8 @@ public class MasterDao extends DBManager {
 
     private Set<Master> allMasters;
 
+    private List<String> master_by_service;
+
     private static final String FIND_MASTER =
             "SELECT name FROM masters ";
     private static final String FIND_MASTER_BY_SERVICE =
@@ -85,6 +87,8 @@ public class MasterDao extends DBManager {
                 master = new Master();
                 master.setName(name);
                 list.add(name);
+                master.setMastersByService(list);
+
             }
 
         } catch (SQLException e) {
@@ -92,4 +96,5 @@ public class MasterDao extends DBManager {
         }
         return list;
     }
+
 }

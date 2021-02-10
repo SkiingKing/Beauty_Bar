@@ -26,10 +26,8 @@ public class RecordDao extends DBManager {
                                 "stage," +
                                 "status_for_admin," +
                                 "start_time," +
-                                "ending_time," +
-                                "services_id," +
-                                "services_masters_id)" +
-                    "VALUES (?,?,?,?,?,?,?)";
+                                "ending_time)" +
+                    "VALUES (?,?,?,?,?)";
     private static final String MAX_ID =
             "SELECT MAX(id) FROM record";
 
@@ -46,7 +44,7 @@ public class RecordDao extends DBManager {
     }
 
 
-    public int addRecord(Record record,Master master,Services services ) {
+    public int addRecord(Record record) {
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -61,11 +59,6 @@ public class RecordDao extends DBManager {
            statement.setBoolean(3,record.isStatus_for_admin());
            statement.setTime(4,record.getStarting_time());
            statement.setTime(5,record.getEnding_time());
-           statement.setInt(6,services.getId());
-           statement.setInt(7,master.getId());
-
-
-
 
            resultAdded = statement.executeUpdate();
 

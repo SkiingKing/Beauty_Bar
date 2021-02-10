@@ -17,6 +17,25 @@ public class Record {
 
     private Time ending_time;
 
+    private String service;
+
+    private String master_name;
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public void setMaster_name(String master_name) {
+        this.master_name = master_name;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public String getMaster_name() {
+        return master_name;
+    }
 
     public void setId(int id) {
         this.id = id;

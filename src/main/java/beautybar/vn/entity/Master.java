@@ -1,5 +1,7 @@
 package beautybar.vn.entity;
 
+import java.util.List;
+
 public class Master {
 
     private int id;
@@ -11,6 +13,8 @@ public class Master {
     private String services;
 
     private int rate;
+
+    private List<String> master_by_service;
 
     public void setServices(String services) {
         this.services = services;
@@ -61,7 +65,14 @@ public class Master {
         return rate;
     }
 
+    public void setMastersByService(List<String> list){
+        this.master_by_service =list;
 
+    }
+
+    public List<String> getMasterByService(){
+        return  master_by_service;
+    }
 
 
 }

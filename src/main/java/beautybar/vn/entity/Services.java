@@ -10,7 +10,7 @@ public class Services {
 
     private int price;
 
-    private Time time_of_service;
+    private Long time_of_service;
 
     private int master_id;
 
@@ -31,7 +31,7 @@ public class Services {
         return master_id;
     }
 
-    public Time getTime_of_service() {
+    public Long getTime_of_service() {
         return time_of_service;
     }
 
@@ -51,7 +51,7 @@ public class Services {
         this.price = price;
     }
 
-    public void setTime_of_service(Time time_of_service) {
+    public void setTime_of_service(Long time_of_service) {
         this.time_of_service = time_of_service;
     }
 }
