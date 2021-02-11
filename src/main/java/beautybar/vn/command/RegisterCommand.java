@@ -12,13 +12,18 @@ public class RegisterCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
 
+
+        HttpSession session =request.getSession();
+
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String name_and_surname = request.getParameter("name_and_surname");
 
-
-
         User user = new User();
+
+
+
         user.setEmail(email);
         user.setPassword(password);
         user.setNameAndSurname(name_and_surname);
@@ -31,18 +36,20 @@ public class RegisterCommand implements Command {
 
         if (!users.contains(user)) {
             add = userDAO.addUser(user);
+            session.setAttribute("user",user);
             System.out.println(add + " size " + userDAO.getAllUsers().size());
         }
 
         if (add == 0) {
             request.setAttribute("notAdd", "This user exists");
         } else {
-            HttpSession session = request.getSession();
             session.setAttribute("user", user);
         }
 
         String result = (add == 0) ? "register.jsp" : "controller?action=main";
         return result;
+
+
     }
 }
 

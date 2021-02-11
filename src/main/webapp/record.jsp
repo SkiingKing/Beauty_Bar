@@ -24,7 +24,7 @@
                             <option>${item}</option>
                         </c:forEach>
             </select>
-        <b>Data:</b>
+        <p> <b>Data:</b></p>
         <p><input type="text" name="data"  size="10" placeholder="yy-mm-dd" required/></p>
         <b>Start:</b>
         <p><input type="text" name="start_time"  size="10" placeholder="hh:mm:ss" required/></p>

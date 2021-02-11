@@ -22,14 +22,15 @@ public class RecordDao extends DBManager {
 
 
     private static final String ADD__RECORD =
-            "INSERT INTO record (date," +
+            "INSERT INTO record (users_id," +
+                                "date," +
                                 "stage," +
                                 "status_for_admin," +
                                 "start_time," +
                                 "ending_time," +
                                 "service," +
                                 "master_name)" +
-                    "VALUES (?,?,?,?,?,?,?)";
+                    "VALUES (?,?,?,?,?,?,?,?)";
     private static final String MAX_ID =
             "SELECT MAX(record_id) FROM record";
 
@@ -58,19 +59,20 @@ public class RecordDao extends DBManager {
 
 
 
-           statement.setDate(1,record.getDate());
-           statement.setBoolean(2,record.isStage());
-           statement.setBoolean(3,record.isStatus_for_admin());
-           statement.setTime(4,record.getStarting_time());
-           statement.setTime(5,record.getEnding_time());
-           statement.setString(6,record.getService());
-           statement.setString(7,record.getMaster_name());
+           statement.setLong(1,record.getUser_id());
+           statement.setDate(2,record.getDate());
+           statement.setBoolean(3,record.isStage());
+           statement.setBoolean(4,record.isStatus_for_admin());
+           statement.setTime(5,record.getStarting_time());
+           statement.setTime(6,record.getEnding_time());
+           statement.setString(7,record.getService());
+           statement.setString(8,record.getMaster_name());
 
            resultAdded = statement.executeUpdate();
 
             ResultSet rs = statement.executeQuery(MAX_ID);
             rs.next();
-            int recordID = rs.getInt(1);
+            Long recordID = rs.getLong(1);
             record.setId(recordID);
 
 

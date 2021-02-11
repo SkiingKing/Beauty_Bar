@@ -5,7 +5,9 @@ import java.sql.Time;
 
 public class Record {
 
-    private int id;
+    private Long id;
+
+    private Long user_id;
 
     private Date date;
 
@@ -20,6 +22,14 @@ public class Record {
     private String service;
 
     private String master_name;
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
 
     public void setService(String service) {
         this.service = service;
@@ -37,7 +47,7 @@ public class Record {
         return master_name;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,7 +73,7 @@ public class Record {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

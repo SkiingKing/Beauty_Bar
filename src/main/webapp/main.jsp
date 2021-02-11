@@ -61,7 +61,7 @@
 
     <div id="sidebar">
         <p><a href="xx.jsp">Masters</a></p>
-        <p><a href="xx.jsp">Timetable</a></p>
+        <p><a href="select.jsp">Timetable</a></p>
         <p><a href="xx.jsp">Response</a></p>
         <p><a href="xx.jsp">About us</a></p>
 

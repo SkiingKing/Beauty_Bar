@@ -81,7 +81,7 @@ public class MasterDao extends DBManager {
 
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 String name = rs.getString(1);
 
                 master = new Master();
