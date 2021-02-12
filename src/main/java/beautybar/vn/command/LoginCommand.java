@@ -5,6 +5,7 @@ import beautybar.vn.dao.UserDAO;
 import beautybar.vn.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class LoginCommand implements Command {
     @Override
@@ -26,5 +27,7 @@ public class LoginCommand implements Command {
 
         return resultPage;
     }
+
+
 }
 

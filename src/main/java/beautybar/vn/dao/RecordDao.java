@@ -7,12 +7,9 @@ import beautybar.vn.entity.Services;
 import beautybar.vn.entity.User;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 
 public class RecordDao extends DBManager {
 
@@ -33,6 +30,8 @@ public class RecordDao extends DBManager {
                     "VALUES (?,?,?,?,?,?,?,?)";
     private static final String MAX_ID =
             "SELECT MAX(record_id) FROM record";
+    private static final String TIMETABLE =
+            "SELECT date,start_time FROM record";
 
 
     private RecordDao() {
@@ -46,6 +45,32 @@ public class RecordDao extends DBManager {
         return instance;
     }
 
+
+    public HashMap<Date,Time> getTimetable() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        HashMap<Date,Time> map = new HashMap<>();
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(TIMETABLE);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Date date = rs.getDate("date");
+                Time start_time = rs.getTime("start_time");
+
+                map.put(date,start_time);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return map;
+
+    }
 
     public int addRecord(Record record) {
 

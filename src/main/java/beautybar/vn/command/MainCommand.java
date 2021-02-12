@@ -4,6 +4,7 @@ import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class MainCommand implements Command{
@@ -20,4 +21,5 @@ public class MainCommand implements Command{
 
         return "main.jsp";
     }
+
 }

@@ -5,6 +5,7 @@ import beautybar.vn.dao.UserDAO;
 import beautybar.vn.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Set;
 
@@ -51,5 +52,6 @@ public class RegisterCommand implements Command {
 
 
     }
+
 }
 
