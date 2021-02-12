@@ -32,6 +32,12 @@ public class RecordDao extends DBManager {
             "SELECT MAX(record_id) FROM record";
     private static final String TIMETABLE =
             "SELECT date,start_time FROM record";
+    private static final String START_TIME_BY_MASTER =
+            "SELECT start_time FROM record WHERE master_name =?";
+    private static final String ENDING_TIME_BY_MASTER =
+            "SELECT ending_time FROM record WHERE master_name =?";
+    private static final String TIME_BY_SERVICE =
+            "SELECT name,estimat_time FROM services";
 
 
     private RecordDao() {
@@ -45,6 +51,55 @@ public class RecordDao extends DBManager {
         return instance;
     }
 
+    public List<Time> getStartTimeByMaster(String master_name) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        List<Time> list = new ArrayList<>();
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(START_TIME_BY_MASTER);
+
+            statement.setString(1,master_name);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Time time = rs.getTime(1);
+                list.add(time);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Time> getEndingTimeByMaster(String master_name) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        List<Time> list = new ArrayList<>();
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(ENDING_TIME_BY_MASTER);
+
+            statement.setString(1,master_name);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Time time = rs.getTime(1);
+                list.add(time);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public HashMap<Date,Time> getTimetable() {
         Connection connection = null;
@@ -62,6 +117,32 @@ public class RecordDao extends DBManager {
                 Time start_time = rs.getTime("start_time");
 
                 map.put(date,start_time);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return map;
+
+    }
+
+    public HashMap<String,Long> getTimeByService() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        HashMap<String,Long> map = new HashMap<>();
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(TIME_BY_SERVICE);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+               String service = rs.getString(1);
+               Long time_in_minute = rs.getLong(2);
+
+                map.put(service,time_in_minute);
 
             }
         } catch (SQLException e) {
