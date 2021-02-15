@@ -9,6 +9,7 @@ import beautybar.vn.entity.User;
 
 import java.sql.*;
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.*;
 
 public class RecordDao extends DBManager {
@@ -32,10 +33,10 @@ public class RecordDao extends DBManager {
             "SELECT MAX(record_id) FROM record";
     private static final String TIMETABLE =
             "SELECT date,start_time FROM record";
-    private static final String START_TIME_BY_MASTER =
-            "SELECT start_time FROM record WHERE master_name =?";
-    private static final String ENDING_TIME_BY_MASTER =
-            "SELECT ending_time FROM record WHERE master_name =?";
+    private static final String START_TIME_BY_MASTER_AND_DATE =
+            "SELECT start_time FROM record WHERE master_name =? AND date =?";
+    private static final String ENDING_TIME_BY_MASTER_AND_DATE =
+            "SELECT ending_time FROM record WHERE master_name =? AND date=?";
     private static final String TIME_BY_SERVICE =
             "SELECT name,estimat_time FROM services";
 
@@ -51,7 +52,7 @@ public class RecordDao extends DBManager {
         return instance;
     }
 
-    public List<Time> getStartTimeByMaster(String master_name) {
+    public List<Time> getStartTimeByMasterAndDate(String master_name,Date date) {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -59,9 +60,10 @@ public class RecordDao extends DBManager {
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(START_TIME_BY_MASTER);
+            statement = connection.prepareStatement(START_TIME_BY_MASTER_AND_DATE);
 
             statement.setString(1,master_name);
+            statement.setDate(2,date);
 
             ResultSet rs = statement.executeQuery();
 
@@ -76,7 +78,7 @@ public class RecordDao extends DBManager {
         return list;
     }
 
-    public List<Time> getEndingTimeByMaster(String master_name) {
+    public List<Time> getEndingTimeByMasterAndDate(String master_name,Date date) {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -84,9 +86,10 @@ public class RecordDao extends DBManager {
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(ENDING_TIME_BY_MASTER);
+            statement = connection.prepareStatement(ENDING_TIME_BY_MASTER_AND_DATE);
 
             statement.setString(1,master_name);
+            statement.setDate(2,date);
 
             ResultSet rs = statement.executeQuery();
 
@@ -153,28 +156,25 @@ public class RecordDao extends DBManager {
 
     }
 
-    public int addRecord(Record record) {
-
+    public void addRecord(Record record) {
         Connection connection = null;
         PreparedStatement statement = null;
-        int resultAdded = 0;
+        long a = 120;
 
         try {
             connection = getConnection();
             statement = connection.prepareStatement(ADD__RECORD);
 
-
-
            statement.setLong(1,record.getUser_id());
            statement.setDate(2,record.getDate());
            statement.setBoolean(3,record.isStage());
            statement.setBoolean(4,record.isStatus_for_admin());
-           statement.setTime(5,record.getStarting_time());
-           statement.setTime(6,record.getEnding_time());
+           statement.setTime(5, Time.valueOf(record.getStarting_time().toLocalTime().plusMinutes(a)));
+           statement.setTime(6,Time.valueOf(record.getEnding_time().toLocalTime().plusMinutes(a)));
            statement.setString(7,record.getService());
            statement.setString(8,record.getMaster_name());
 
-           resultAdded = statement.executeUpdate();
+           statement.executeUpdate();
 
             ResultSet rs = statement.executeQuery(MAX_ID);
             rs.next();
@@ -185,7 +185,7 @@ public class RecordDao extends DBManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultAdded;
+
     }
 
 }

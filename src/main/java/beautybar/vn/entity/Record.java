@@ -65,13 +65,6 @@ public class Record {
         this.status_for_admin = status_for_admin;
     }
 
-    public void setStarting_time(Time starting_time) {
-        this.starting_time = starting_time;
-    }
-
-    public void setEnding_time(Time ending_time) {
-        this.ending_time = ending_time;
-    }
 
 
     public Long getId() {
@@ -98,8 +91,11 @@ public class Record {
         return ending_time;
     }
 
+    public void setStarting_time(Time starting_time) {
+        this.starting_time = starting_time;
+    }
 
-
-
-
+    public void setEnding_time(Time ending_time) {
+        this.ending_time = ending_time;
+    }
 }
