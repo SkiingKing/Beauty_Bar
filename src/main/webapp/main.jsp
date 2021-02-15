@@ -1,10 +1,12 @@
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="beautybar.vn.entity.Role" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Исторический турнир</title>
     <style type="text/css">
+
         body {
             font: 10pt Arial, Helvetica, sans-serif;
             background: #e1dfb9;

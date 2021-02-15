@@ -69,6 +69,8 @@ public class RecordDao extends DBManager {
 
             while (rs.next()) {
                 Time time = rs.getTime(1);
+                LocalTime l = time.toLocalTime();
+                time = Time.valueOf(l.minusMinutes(120));
                 list.add(time);
             }
 
@@ -95,6 +97,8 @@ public class RecordDao extends DBManager {
 
             while (rs.next()) {
                 Time time = rs.getTime(1);
+                LocalTime l = time.toLocalTime();
+                time = Time.valueOf(l.minusMinutes(120));
                 list.add(time);
             }
 
