@@ -65,10 +65,13 @@
         <p><a href="xx.jsp">Masters</a></p>
         <p><a href="select.jsp">Record</a></p>
         <p><a href="xx.jsp">Response</a></p>
-        <p><a href="xx.jsp">About us</a></p>
-
-
+        <form method="post" action="controller?action=update_status_by_master">
+<%--        <p><a href="master_timetable.jsp"  type="submit">Time table</a></p>--%>
+            <p><input type="submit" value="Time table" /></p>
+        </form>
     </div>
+
+
     <div id="content">
         <h2>Text</h2>
         <p>  Text types in literature form the basic styles of writing. Factual texts merely seek to inform,

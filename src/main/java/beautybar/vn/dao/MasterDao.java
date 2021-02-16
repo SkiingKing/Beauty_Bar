@@ -2,13 +2,11 @@ package beautybar.vn.dao;
 
 import beautybar.vn.database.DBManager;
 import beautybar.vn.entity.Master;
+import beautybar.vn.entity.Record;
 import beautybar.vn.entity.User;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -96,5 +94,7 @@ public class MasterDao extends DBManager {
         }
         return list;
     }
+
+
 
 }

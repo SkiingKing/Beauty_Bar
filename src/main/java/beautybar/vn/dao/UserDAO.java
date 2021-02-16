@@ -1,6 +1,8 @@
 package beautybar.vn.dao;
 
 import beautybar.vn.database.DBManager;
+import beautybar.vn.entity.Master;
+import beautybar.vn.entity.Record;
 import beautybar.vn.entity.Role;
 import beautybar.vn.entity.User;
 
@@ -9,7 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserDAO extends DBManager {
@@ -26,6 +30,9 @@ public class UserDAO extends DBManager {
             "SELECT * FROM users";
     private static final String GET__USER =
             "SELECT id,role_role_id FROM users WHERE password = ? AND email = ?";
+    private static final String FIND_MASTER_BY_EMAIL =
+            "SELECT nameandsurname FROM users WHERE email = ?";
+
 
     private UserDAO() {
         allUsers = new HashSet<User>();
@@ -126,6 +133,28 @@ public class UserDAO extends DBManager {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public String findMasterByEmail(String email){
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(FIND_MASTER_BY_EMAIL);
+
+            statement.setString(1,email);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                String master_name = rs.getString("nameandsurname");
+                return master_name;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

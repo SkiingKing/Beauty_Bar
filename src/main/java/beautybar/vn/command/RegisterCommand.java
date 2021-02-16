@@ -19,7 +19,7 @@ public class RegisterCommand implements Command {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String name_and_surname = request.getParameter("name_and_surname");
+        String name_and_surname = request.getParameter("nameandsurname");
 
         User user = new User();
 

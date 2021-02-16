@@ -34,7 +34,6 @@
                 </c:forEach>
         </select>
 
-
         <p><input type="submit" value="Send" /></p>
     </form>
 </div>
