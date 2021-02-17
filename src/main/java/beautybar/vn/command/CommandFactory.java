@@ -27,7 +27,9 @@ public class CommandFactory {
         comands.put("login", new LoginCommand());
         comands.put("select",new SelectCommand());
         comands.put("record", new RecordCommand());
-        comands.put("update_status_by_master",new TimetableCommand());
+        comands.put("master_timetable",new TimetableCommand());
+        comands.put("master",new MasterCommand());
+        comands.put("sort",new SortCommand());
 
     }
 

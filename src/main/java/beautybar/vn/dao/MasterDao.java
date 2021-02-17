@@ -21,7 +21,7 @@ public class MasterDao extends DBManager {
     private List<String> master_by_service;
 
     private static final String FIND_MASTER =
-            "SELECT name FROM masters ";
+            "SELECT name,rate,services FROM masters ";
     private static final String FIND_MASTER_BY_SERVICE =
             "SELECT name FROM masters WHERE services=?";
 
@@ -36,12 +36,15 @@ public class MasterDao extends DBManager {
         return instance;
     }
 
-
-    public List<String> getMasters() {
+    /**
+     * Returns all masters.
+     *
+     * @return  List<Master>
+     */
+    public List<Master> getMasters() {
         Connection connection = null;
         PreparedStatement statement = null;
-        List<String> list = new ArrayList<>();
-
+        List<Master> list = new ArrayList<>();
 
         try {
             connection = getConnection();
@@ -51,10 +54,16 @@ public class MasterDao extends DBManager {
 
             while (rs.next()) {
                 String master_name = rs.getString("name");
+                int rate = rs.getInt("rate");
+                String service = rs.getString("services");
 
                 Master master = new Master();
+
                 master.setName(master_name);
-                list.add(master_name);
+                master.setRate(rate);
+                master.setServices(service);
+
+                list.add(master);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,6 +72,12 @@ public class MasterDao extends DBManager {
         return list;
     }
 
+    /**
+     * Returns name of master by service.
+     *
+     * @param service
+     * @return List<String>
+     */
     public List<String> getMasterByService(String service) {
         Master master;
         Connection connection = null;
@@ -94,6 +109,8 @@ public class MasterDao extends DBManager {
         }
         return list;
     }
+
+
 
 
 

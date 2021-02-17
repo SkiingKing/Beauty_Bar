@@ -61,7 +61,7 @@ public class Master {
         return password;
     }
 
-    public int getRate() {
+    public Integer getRate() {
         return rate;
     }
 
