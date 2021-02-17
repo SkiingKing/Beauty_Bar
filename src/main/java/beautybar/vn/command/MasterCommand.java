@@ -21,7 +21,7 @@ public class MasterCommand implements Command{
 
         List<Master> masters = masterDao.getMasters();
 
-        log.debug("Ok!!!!!!!!!!!!!!");
+
 
         request.setAttribute("masters",masters);
 

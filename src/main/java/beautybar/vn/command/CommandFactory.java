@@ -31,6 +31,7 @@ public class CommandFactory {
         comands.put("master",new MasterCommand());
         comands.put("sort",new SortCommand());
         comands.put("service",new ServiceCommand());
+        comands.put("admin_list",new AdminListCommand());
 
     }
 

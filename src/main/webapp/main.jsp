@@ -63,9 +63,12 @@
 
     <div id="sidebar">
         <p><a href="main.jsp">Main</a></p>
-        <form method="post" action="controller?action=master">
-            <p><input type="submit" value="Masters" /></p>
-        </form>
+
+        <a onclick="location.href='master?action=master'">Masters</a>
+
+<%--        <form method="post" action="controller?action=master">--%>
+<%--            <p><input type="submit" value="Masters" /></p>--%>
+<%--        </form>--%>
         <form method="post" action="controller?action=service">
             <p><input type="submit" value="Services" /></p>
         </form>
@@ -73,6 +76,9 @@
         <p><a href="xx.jsp">Response</a></p>
         <form method="post" action="controller?action=master_timetable">
             <p><input type="submit" value="Time table" /></p>
+        </form>
+        <form method="post" action="controller?action=admin_list">
+            <p><input type="submit" value="Admin list" /></p>
         </form>
     </div>
 

@@ -22,6 +22,16 @@
         </init-param>
     </filter>
 
+    <servlet>
+        <servlet-name>master</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>master</servlet-name>
+        <url-pattern>/master</url-pattern>
+    </servlet-mapping>
+
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/WEB-INF/jsp/*</url-pattern>

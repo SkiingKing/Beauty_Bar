@@ -270,7 +270,7 @@ public class RecordDao extends DBManager {
     public void addRecord(Record record) {
         Connection connection = null;
         PreparedStatement statement = null;
-        long a = 120;
+        long a = 180;
 
         try {
             connection = getConnection();
