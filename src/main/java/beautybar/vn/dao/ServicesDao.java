@@ -16,7 +16,8 @@ public class ServicesDao extends DBManager {
 
     private Set<Services> allServices;
 
-
+    private static final String SELECT_SERVICES =
+            "SELECT * FROM services";
     private static final String FIND_SERVICE =
             "SELECT name FROM services";
     private static final String FIND_TIME_BY_SERVICE =
@@ -32,6 +33,43 @@ public class ServicesDao extends DBManager {
             instance = new ServicesDao();
         }
         return instance;
+    }
+
+    /**
+     * Return all service and it's etimat_time and price.
+     *
+     * @return List<Services>
+     */
+
+    public List<Services> getAllService() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        List<Services> list = new ArrayList<>();
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(SELECT_SERVICES);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String service_name = rs.getString("name");
+                int price = rs.getInt("price");
+                Long time = rs.getLong("estimat_time");
+
+                Services services = new Services();
+                services.setName_of_services(service_name);
+                services.setPrice(price);
+                services.setTime_of_service(time);
+
+                list.add(services);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+
     }
 
     public List<String> getService() {

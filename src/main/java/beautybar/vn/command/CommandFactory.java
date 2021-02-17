@@ -30,6 +30,7 @@ public class CommandFactory {
         comands.put("master_timetable",new TimetableCommand());
         comands.put("master",new MasterCommand());
         comands.put("sort",new SortCommand());
+        comands.put("service",new ServiceCommand());
 
     }
 
