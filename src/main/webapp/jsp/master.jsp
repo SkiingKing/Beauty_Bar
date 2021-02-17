@@ -61,20 +61,20 @@
 <div id="container">
     <div id="header">BeautyBar</div>
     <div id ="head_right">
-        <a href="register.jsp">Register</a>
-        <a href="login.jsp">Login</a>
+        <a href="../register.jsp">Register</a>
+        <a href="/login.jsp">Login</a>
         <a href="controller?action=logout">Logout</a>
     </div>
 
     <div id="sidebar">
-        <p><a href="main.jsp">Main</a></p>
+        <p><a href="../main.jsp">Main</a></p>
         <form method="post" action="controller?action=master">
             <p><input type="submit" value="Masters" /></p>
         </form>
         <form method="post" action="controller?action=service">
             <p><input type="submit" value="Services" /></p>
         </form>
-        <p><a href="select.jsp">Record</a></p>
+        <p><a href="../select.jsp">Record</a></p>
         <p><a href="xx.jsp">Response</a></p>
         <form method="post" action="controller?action=update_status_by_master">
             <p><input type="submit" value="Time table" /></p>

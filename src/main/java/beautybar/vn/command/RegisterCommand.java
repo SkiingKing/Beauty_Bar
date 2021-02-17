@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.UserDAO;
 import beautybar.vn.entity.User;
@@ -47,7 +48,7 @@ public class RegisterCommand implements Command {
             session.setAttribute("user", user);
         }
 
-        String result = (add == 0) ? "register.jsp" : "controller?action=main";
+        String result = (add == 0) ? Path.PAGE__REGISTER : "controller?action=main";
         return result;
 
 

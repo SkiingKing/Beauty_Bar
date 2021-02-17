@@ -1,18 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: shvep
-  Date: 16.02.2021
-  Time: 11:04
+  Date: 17.02.2021
+  Time: 11:23
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
+
 </head>
-<body>
+
 <style type="text/css">
 
     body {
@@ -59,60 +59,67 @@
         clear: left;
     }
 </style>
+</head>
+<body>
 <div id="container">
     <div id="header">BeautyBar</div>
     <div id ="head_right">
-        <a href="register.jsp">Register</a>
-        <a href="login.jsp">Login</a>
+        <a href="../register.jsp">Register</a>
+        <a href="../login.jsp">Login</a>
         <a href="controller?action=logout">Logout</a>
     </div>
 
     <div id="sidebar">
-        <p><a href="main.jsp">Main</a></p>
+        <p><a href="../main.jsp">Main</a></p>
         <form method="post" action="controller?action=master">
             <p><input type="submit" value="Masters" /></p>
         </form>
         <form method="post" action="controller?action=service">
             <p><input type="submit" value="Services" /></p>
         </form>
-        <p><a href="select.jsp">Record</a></p>
+        <p><a href="../select.jsp">Record</a></p>
         <p><a href="xx.jsp">Response</a></p>
         <form method="post" action="controller?action=update_status_by_master">
-            <%--        <p><a href="master_timetable.jsp"  type="submit">Time table</a></p>--%>
             <p><input type="submit" value="Time table" /></p>
         </form>
     </div>
 
 
+
     <div id="content">
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Stage</th>
-        <th>Start time</th>
-        <th>Ending time</th>
-        <th>Service</th>
-    </tr>
-<%--    <jsp:useBean id="records" class="beautybar.vn.command.TimetableCommand" scope="request"/>--%>
-<%--    <c:forEach var="record" items="${records.records}">--%>
-    <c:forEach var="records" items="${records}">
-        <tr>
-            <td>${records.id}</td>
-            <td>${records.date}</td>
-            <td>${records.stage}</td>
-            <td>${records.starting_time}</td>
-            <td>${records.ending_time}</td>
-            <td>${records.service}</td>
-        </tr>
-    </c:forEach>
+        <form method="post" action="controller?action=sort">
+            <b>Service</b>
+            <select size="5" name="sort" required>
+                <option disabled>Select sorting</option>
+                <option>For the master</option>
+                <option>For the rate</option>
+                <option>For the service</option>
+            </select>
 
-<%--    pattern="yy-MM-dd"--%>
-</table>
+            <p><input type="submit" value="Sort" /></p>
+        </form>
+
+        <table border="1">
+            <tr>
+                <th>Name and Surname</th>
+                <th>Rate</th>
+                <th>Service</th>
+            </tr>
+            <c:forEach var="masters_2" items="${masters_2}">
+            <tr>
+                <td>${masters_2.name}</td>
+                <td>${masters_2.rate}</td>
+                <td>${masters_2.services}</td>
+            </tr>
+            </c:forEach>
+        </table>
+
     </div>
     <div id="footer">instagram:@BeutyBar</div>
 </div>
+
+
 
 </body>
 </html>

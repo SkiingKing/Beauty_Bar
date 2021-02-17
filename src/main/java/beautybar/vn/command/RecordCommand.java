@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.RecordDao;
 import beautybar.vn.entity.Master;
@@ -68,16 +69,16 @@ public class RecordCommand implements Command{
 
         if(start.isEmpty()) {
             recordDao.addRecord(record);
-            return "main.jsp";
+            return Path.PAGE__MAIN;
         } else for(int i=0;i< start.size();i++){
                     if(!start_time.after(start.get(i)) && !ending_time.before(end.get(i))
                             || start_time.after(start.get(i)) && ending_time.after(end.get(i))){
                         recordDao.addRecord(record);
-                        return "main.jsp";
-                    }else return  "error.jsp";
+                        return Path.PAGE__MAIN;
+                    }else return  Path.PAGE__ERROR_PAGE_RECORD;
             }
 
-       return "main.jsp";
+       return Path.PAGE__MAIN;
     }
 
 }

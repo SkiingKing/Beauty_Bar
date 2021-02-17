@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.UserDAO;
 import beautybar.vn.entity.User;
@@ -21,7 +22,7 @@ public class LoginCommand implements Command {
         UserDAO userDAO = factory.getUserDAO();
         User user = userDAO.getUser(name, password);
 
-        String resultPage = (user == null) ? "login.jsp" : "controller?action=main";
+        String resultPage = (user == null) ? Path.PAGE__LOGIN : "controller?action=main";
 
         if (user == null) {
             request.setAttribute("notExists", "This user not exists");

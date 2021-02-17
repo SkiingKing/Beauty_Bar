@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.RecordDao;
 import beautybar.vn.dao.UserDAO;
@@ -46,7 +47,7 @@ public class TimetableCommand implements Command{
         request.setAttribute("records", records);
 
 
-        return "master_timetable.jsp";
+        return Path.PAGE__MASTER_TIMETABLE;
     }
 
     public List<Record> getRecords(){

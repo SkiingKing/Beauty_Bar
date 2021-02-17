@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.MasterDao;
 import beautybar.vn.entity.Master;
@@ -60,6 +61,6 @@ public class SortCommand implements Command{
 
         request.setAttribute("masters_2",masters_2);
 
-        return "sort_master.jsp";
+        return Path.PAGE__SORT_MASTER;
     }
 }

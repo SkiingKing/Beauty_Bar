@@ -1,11 +1,8 @@
 package beautybar.vn.dao;
 
 import beautybar.vn.database.DBManager;
-
-
-import beautybar.vn.entity.Master;
 import beautybar.vn.entity.Services;
-import beautybar.vn.entity.User;
+
 
 import java.sql.*;
 import java.util.*;
@@ -20,8 +17,7 @@ public class ServicesDao extends DBManager {
             "SELECT * FROM services";
     private static final String FIND_SERVICE =
             "SELECT name FROM services";
-    private static final String FIND_TIME_BY_SERVICE =
-            "SELECT estimat_time FROM services WHERE name=?";
+
 
 
     private ServicesDao() {
@@ -72,6 +68,12 @@ public class ServicesDao extends DBManager {
 
     }
 
+
+    /**
+     * Return names of all service.
+     *
+     * @return  List<String>
+     */
     public List<String> getService() {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -98,30 +100,5 @@ public class ServicesDao extends DBManager {
 
     }
 
-    public Long getServiceTime(String service) {
-        Connection connection = null;
-        PreparedStatement statement = null;
 
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement(FIND_TIME_BY_SERVICE);
-
-            statement.setString(1,service);
-
-
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                Long time = rs.getLong(1);
-
-                Services services = new Services();
-                services.setTime_of_service(time);
-                return time;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.ServicesDao;
 import beautybar.vn.entity.Services;
@@ -19,6 +20,6 @@ public class ServiceCommand implements Command{
 
         request.setAttribute("services",services);
 
-        return "services.jsp";
+        return Path.PAGE__SERVICES;
     }
 }

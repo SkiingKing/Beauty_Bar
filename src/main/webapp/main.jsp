@@ -71,7 +71,7 @@
         </form>
         <p><a href="select.jsp">Record</a></p>
         <p><a href="xx.jsp">Response</a></p>
-        <form method="post" action="controller?action=update_status_by_master">
+        <form method="post" action="controller?action=master_timetable">
             <p><input type="submit" value="Time table" /></p>
         </form>
     </div>

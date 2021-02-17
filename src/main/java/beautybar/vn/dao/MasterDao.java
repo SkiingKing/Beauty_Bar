@@ -2,8 +2,7 @@ package beautybar.vn.dao;
 
 import beautybar.vn.database.DBManager;
 import beautybar.vn.entity.Master;
-import beautybar.vn.entity.Record;
-import beautybar.vn.entity.User;
+
 
 
 import java.sql.*;

@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.entity.User;
 
@@ -19,7 +20,7 @@ public class MainCommand implements Command{
             //викликаєм dao для не зареєстрованого користувача
         }
 
-        return "main.jsp";
+        return Path.PAGE__MAIN;
     }
 
 }

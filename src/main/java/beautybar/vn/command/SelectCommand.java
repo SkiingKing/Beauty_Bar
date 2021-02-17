@@ -2,6 +2,7 @@ package beautybar.vn.command;
 
 
 
+import beautybar.vn.Path;
 import beautybar.vn.Test;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.MasterDao;
@@ -37,7 +38,7 @@ public class SelectCommand implements Command{
         Test.my =list;
 
 
-        return "record.jsp";
+        return Path.PAGE__RECORD;
     }
 
     public List<String> getServices(){

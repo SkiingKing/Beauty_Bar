@@ -1,10 +1,8 @@
 package beautybar.vn.dao;
 
 import beautybar.vn.database.DBManager;
-import beautybar.vn.entity.Master;
 import beautybar.vn.entity.Record;
-import beautybar.vn.entity.Services;
-import beautybar.vn.entity.User;
+
 
 
 import java.sql.*;
@@ -32,9 +30,6 @@ public class RecordDao extends DBManager {
 
     private static final String MAX_ID =
             "SELECT MAX(record_id) FROM record";
-
-    private static final String TIMETABLE =
-            "SELECT date,start_time FROM record";
 
     private static final String START_TIME_BY_MASTER_AND_DATE =
             "SELECT start_time FROM record WHERE master_name =? AND date =?";
@@ -232,32 +227,6 @@ public class RecordDao extends DBManager {
             e.printStackTrace();
         }
         return list;
-    }
-
-    public HashMap<Date,Time> getTimetable() {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        HashMap<Date,Time> map = new HashMap<>();
-
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement(TIMETABLE);
-
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-                Date date = rs.getDate("date");
-                Time start_time = rs.getTime("start_time");
-
-                map.put(date,start_time);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return map;
-
     }
 
 

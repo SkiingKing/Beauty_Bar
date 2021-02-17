@@ -45,6 +45,12 @@ public class UserDAO extends DBManager {
         return instance;
     }
 
+    /**
+     * Add new user.
+     *
+     * @param user
+     * @return
+     */
     public int addUser(User user) {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -73,6 +79,11 @@ public class UserDAO extends DBManager {
         return resultAdded;
     }
 
+    /**
+     * Return all user.
+     *
+     * @return Set<User>
+     */
     public Set<User> getAllUsers() {
         Set<User> users = new HashSet<User>();
 
@@ -103,6 +114,14 @@ public class UserDAO extends DBManager {
         }
         return users;
     }
+
+    /**
+     * Return user if he is in the bd.
+     *
+     * @param name
+     * @param password
+     * @return user
+     */
 
     public User getUser(String name, String password) {
         User user = null;
@@ -135,6 +154,12 @@ public class UserDAO extends DBManager {
         return user;
     }
 
+    /**
+     * Find master by email, and return his name and surname.
+     *
+     * @param email
+     * @return String
+     */
     public String findMasterByEmail(String email){
         Connection connection = null;
         PreparedStatement statement = null;
