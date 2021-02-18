@@ -14,6 +14,7 @@ public class UpdateSatusForAdmin implements Command{
     @Override
     public String execute(HttpServletRequest request) {
 
+        log.debug("Command start");
         String recordId = request.getParameter("recordId");
         log.trace("recordList --> " + recordId);
         int recId=Integer.parseInt(recordId);

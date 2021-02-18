@@ -48,6 +48,7 @@
         float: left;
     }
     #content {
+        width: 600px;
         margin-left: 130px;
         padding: 10px;
         background: #fff;
@@ -105,6 +106,7 @@
             <td>${records.starting_time}</td>
             <td>${records.ending_time}</td>
             <td>${records.service}</td>
+            <td><button onclick="location.href='master_timetable?action=update_master_status&recordId=${records.id}'">Ready</button></td>
         </tr>
     </c:forEach>
 

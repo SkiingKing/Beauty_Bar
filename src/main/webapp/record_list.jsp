@@ -34,11 +34,16 @@
             <td>${records.service}</td>
             <td>${records.master_name}</td>
             <td><button onclick="location.href='record_list?action=deleteRecord&recordId=${records.id}'">Delete</button></td>
-            <td><button>Edit</button> </td>
+<%--            <td><form method="post" action="controller?action=edit&recordId=${records.id}&start=${records.starting_time}&end=${records.ending_time}">--%>
+<%--                <p><input type="submit" value="Edit" /></p>--%>
+<%--            </form></td>--%>
+<%--            <td><button onclick="location.href='edit_record?action=edit'">Edit</button></td>--%>
+            <td><button onclick="location.href='edit_record.jsp'"/>Edit</td>
             <td><button onclick="location.href='record_list?action=update_admin_status&recordId=${records.id}'">Сalculate</button></td>
         </tr>
     </c:forEach>
 <%--    <button onclick="location.href='publicationView?command=deleteItem&publicationId=${publication.id}'">--%>
+<%--    &recordId=${records.id}&start=${records.starting_time}&end=${records.ending_time}--%>
 </table>
 </body>
 </html>

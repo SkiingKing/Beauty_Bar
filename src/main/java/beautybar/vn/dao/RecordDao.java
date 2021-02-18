@@ -41,10 +41,10 @@ public class RecordDao extends DBManager {
             "SELECT name,estimat_time FROM services";
 
     private static final String GET_ALL_RECORDS =
-            "SELECT * FROM record";
+            "SELECT * FROM record WHERE status_for_admin = 0";
 
     private static final String GET_ALL_RECORDS_BY_MASTER =
-            "SELECT * FROM record WHERE master_name=?";
+            "SELECT * FROM record WHERE stage = 0 AND master_name=?";
 
     private static final String FIND_RECORD_BY_ID =
             "SELECT * FROM record WHERE record_id=?";
@@ -54,6 +54,13 @@ public class RecordDao extends DBManager {
 
     private static final String UPDATE_STATUS =
             "UPDATE record SET status_for_admin = 1 WHERE record_id=?";
+
+    private static final String UPDATE_STAGE =
+            "UPDATE record SET stage= 1 WHERE record_id=?";
+
+    private static final String UPDATE_TIMESLOT =
+            "UPDATE record SET start_time =? , ending_time =? WHERE record_id=?";
+
 
 
     private RecordDao() {
@@ -368,6 +375,11 @@ public class RecordDao extends DBManager {
         }
 
     }
+
+    /**
+     * Update status of record(calculate).
+     * @param id
+     */
     public void updateAdminStatus(int id) {
         Connection conn = null;
         Connection connection = null;
@@ -384,15 +396,24 @@ public class RecordDao extends DBManager {
         }
 
     }
-    public void updateAdminRecord(int id) {
+
+    /**
+     * Change record timeslot.
+     * @param id
+     * @param start
+     * @param end
+     */
+    public void updateAdminRecord(int id,Time start,Time end) {
         Connection conn = null;
         Connection connection = null;
         PreparedStatement statement = null;
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(UPDATE_STATUS);
-            statement.setInt(1, id);
+            statement = connection.prepareStatement(UPDATE_TIMESLOT);
+            statement.setTime(1, start);
+            statement.setTime(2, end);
+            statement.setInt(3, id);
             statement.executeUpdate();
         }
         catch (SQLException ex) {
@@ -401,6 +422,10 @@ public class RecordDao extends DBManager {
 
     }
 
+    /**
+     * Delete record(for admin).
+     * @param id
+     */
 
     public void deleteRecord(int id) {
         Connection conn = null;
@@ -410,7 +435,22 @@ public class RecordDao extends DBManager {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(DELETE_RECORD);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
+    }
+    public void updateMasterStatus(int id) {
+        Connection conn = null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(UPDATE_STAGE);
             statement.setInt(1, id);
             statement.executeUpdate();
         }

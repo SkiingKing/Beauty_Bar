@@ -24,6 +24,7 @@ public class MasterDao extends DBManager {
     private static final String FIND_MASTER_BY_SERVICE =
             "SELECT name FROM masters WHERE services=?";
 
+
     private MasterDao() {
         allMasters = new HashSet<Master>();
     }

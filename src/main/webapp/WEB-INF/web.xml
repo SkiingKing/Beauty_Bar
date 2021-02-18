@@ -61,9 +61,25 @@
         <servlet-name>record_list</servlet-name>
         <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>edit_record</servlet-name>
+        <url-pattern>/edit_record</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>edit_record</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>edit</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>edit</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
 
 
     <filter-mapping>
