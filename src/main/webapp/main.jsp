@@ -62,24 +62,17 @@
     </div>
 
     <div id="sidebar">
-        <p><a href="main.jsp">Main</a></p>
-
-        <a onclick="location.href='master?action=master'">Masters</a>
-
-<%--        <form method="post" action="controller?action=master">--%>
-<%--            <p><input type="submit" value="Masters" /></p>--%>
-<%--        </form>--%>
-        <form method="post" action="controller?action=service">
-            <p><input type="submit" value="Services" /></p>
-        </form>
-        <p><a href="select.jsp">Record</a></p>
-        <p><a href="xx.jsp">Response</a></p>
-        <form method="post" action="controller?action=master_timetable">
-            <p><input type="submit" value="Time table" /></p>
-        </form>
-        <form method="post" action="controller?action=admin_list">
-            <p><input type="submit" value="Admin list" /></p>
-        </form>
+        <div id="menu">
+            <ul>
+                <p><li><a href="main.jsp">Main</a></li></p>
+                <p><li><a onclick="location.href='master?action=master'">Masters</a></li></ul></p>
+                <p><li><a onclick="location.href='services?action=service'">Services</a></li></p>
+                <p><li><a onclick="location.href='master_timetable?action=master_timetable'">Time table</a></li></p>
+                <p><li><a onclick="location.href='record_list?action=admin_list'">Admin list</a></li></p>
+                <p><li><a href="select.jsp">Record</a></li></p>
+                <p><li><a href="xx.jsp">Response</a></li></p>
+            </ul>
+        </div>
     </div>
 
 

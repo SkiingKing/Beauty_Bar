@@ -46,6 +46,15 @@ public class RecordDao extends DBManager {
     private static final String GET_ALL_RECORDS_BY_MASTER =
             "SELECT * FROM record WHERE master_name=?";
 
+    private static final String FIND_RECORD_BY_ID =
+            "SELECT * FROM record WHERE record_id=?";
+
+    private static final String DELETE_RECORD =
+            "DELETE FROM record WHERE record_id=?";
+
+    private static final String UPDATE_STATUS =
+            "UPDATE record SET status_for_admin = 1 WHERE record_id=?";
+
 
     private RecordDao() {
         allrecord = new HashSet<Record>();
@@ -57,6 +66,67 @@ public class RecordDao extends DBManager {
         }
         return instance;
     }
+
+    /**
+     * Find record by id.
+     *
+     * @param id
+     * @return record
+     */
+
+    public Record findRecordById(int id){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        Record record = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(FIND_RECORD_BY_ID);
+
+            statement.setInt(1,id);
+
+
+            ResultSet rs = statement.executeQuery();
+
+
+            if (rs.next()) {
+
+                Long record_id = rs.getLong("record_id");
+                Long user_id = rs.getLong("users_id");
+                Date date = rs.getDate("date");
+                boolean stage = rs.getBoolean("stage");
+                boolean status_for_admin = rs.getBoolean("status_for_admin");
+                Time start_time = rs.getTime("start_time");
+                Time ending_time = rs.getTime("ending_time");
+                String service = rs.getString("service");
+                String master_name  = rs.getString("master_name");
+
+                record = new Record();
+
+                record.setId(record_id);
+                record.setUser_id(user_id);
+                record.setDate(date);
+                record.setStage(stage);
+                record.setStatus_for_admin(status_for_admin);
+                record.setStarting_time(start_time);
+                record.setEnding_time(ending_time);
+                record.setService(service);
+                record.setMaster_name(master_name);
+
+                return record;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return record;
+
+    }
+
+
+
+
 
     /**
      * Returns all records.
@@ -295,6 +365,57 @@ public class RecordDao extends DBManager {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+    }
+    public void updateAdminStatus(int id) {
+        Connection conn = null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(UPDATE_STATUS);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+    public void updateAdminRecord(int id) {
+        Connection conn = null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(UPDATE_STATUS);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    public void deleteRecord(int id) {
+        Connection conn = null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(DELETE_RECORD);
+
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
     }

@@ -1,5 +1,6 @@
 package beautybar.vn.command;
 
+import beautybar.vn.Path;
 import beautybar.vn.dao.DaoFactory;
 import beautybar.vn.dao.RecordDao;
 import beautybar.vn.entity.Record;
@@ -20,6 +21,6 @@ public class AdminListCommand implements Command{
         request.setAttribute("records",records);
 
 
-        return "jsp/admin/record_list.jsp";
+        return Path.PAGE__ADMIN_LIST;
     }
 }

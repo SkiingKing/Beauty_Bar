@@ -32,6 +32,40 @@
         <url-pattern>/master</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>services</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>services</servlet-name>
+        <url-pattern>/services</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>master_timetable</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>master_timetable</servlet-name>
+        <url-pattern>/master_timetable</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>record_list</servlet-name>
+        <url-pattern>/record_list</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>record_list</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+
+
+
+
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/WEB-INF/jsp/*</url-pattern>

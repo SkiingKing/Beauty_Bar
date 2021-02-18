@@ -32,6 +32,8 @@ public class CommandFactory {
         comands.put("sort",new SortCommand());
         comands.put("service",new ServiceCommand());
         comands.put("admin_list",new AdminListCommand());
+        comands.put("deleteRecord",new DeleteRecord());
+        comands.put("update_admin_status",new UpdateSatusForAdmin());
 
     }
 

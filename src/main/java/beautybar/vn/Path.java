@@ -13,6 +13,7 @@ public class Path {
     public static final String PAGE__SORT_MASTER = "jsp/sort_master.jsp";
     public static final String PAGE__RECORD = "jsp/record.jsp";
     public static final String PAGE__MASTER_TIMETABLE = "jsp/master_timetable.jsp";
+    public static final String PAGE__ADMIN_LIST = "jsp/record_list.jsp";
 
 
 }

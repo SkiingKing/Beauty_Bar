@@ -33,9 +33,9 @@
             <td>${records.ending_time}</td>
             <td>${records.service}</td>
             <td>${records.master_name}</td>
-            <td><button>Delete</button> </td>
+            <td><button onclick="location.href='record_list?action=deleteRecord&recordId=${records.id}'">Delete</button></td>
             <td><button>Edit</button> </td>
-            <td><button>Сalculate</button> </td>
+            <td><button onclick="location.href='record_list?action=update_admin_status&recordId=${records.id}'">Сalculate</button></td>
         </tr>
     </c:forEach>
 <%--    <button onclick="location.href='publicationView?command=deleteItem&publicationId=${publication.id}'">--%>
