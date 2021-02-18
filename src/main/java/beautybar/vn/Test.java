@@ -1,5 +1,6 @@
 package beautybar.vn;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,5 +10,6 @@ public class Test {
 
 
     public List<String> getList(){ return my;}
+
 
 }

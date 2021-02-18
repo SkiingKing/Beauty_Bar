@@ -70,15 +70,66 @@ public class RecordCommand implements Command{
         if(start.isEmpty()) {
             recordDao.addRecord(record);
             return Path.PAGE__MAIN;
-        } else for(int i=0;i< start.size();i++){
-                    if(!start_time.after(start.get(i)) && !ending_time.before(end.get(i))
-                            || start_time.after(start.get(i)) && ending_time.after(end.get(i))){
+        }else
+            for(int i=0;i< start.size();i++){
+                if (start_time.equals(start.get(i))) return Path.PAGE__ERROR_PAGE_RECORD;
+                if(ending_time.equals(end.get(i))) return Path.PAGE__ERROR_PAGE_RECORD;
+
+
+                int sa = start_time.toLocalTime().getHour();
+                int en =end.get(i).toLocalTime().getHour();
+                int sam = start_time.toLocalTime().getMinute();
+                int enm = end.get(i).toLocalTime().getMinute();
+
+                int ens =ending_time.toLocalTime().toSecondOfDay();
+                int egs = end.get(i).toLocalTime().toSecondOfDay();
+
+                 if(start_time.before(start.get(i)) && ending_time.before(end.get(i))) {
+                     recordDao.addRecord(record);
+                     return Path.PAGE__MAIN;
+                 }
+
+                if(sa == en && sam >= enm) {
+                    if(ens - egs >= (int) (temp * 60)) {
                         recordDao.addRecord(record);
                         return Path.PAGE__MAIN;
-                    }else return  Path.PAGE__ERROR_PAGE_RECORD;
-            }
+                    }else return Path.PAGE__ERROR_PAGE_RECORD;
+                }
 
-       return Path.PAGE__MAIN;
+
+
+//                int a = start_time.toLocalTime().toSecondOfDay();
+//                int b =start.get(i).toLocalTime().toSecondOfDay();
+//                int d=end.get(i).toLocalTime().toSecondOfDay();
+//
+//                if(start_time.toLocalTime().toSecondOfDay() >= start.get(i).toLocalTime().toSecondOfDay()
+//                        &&  start_time.toLocalTime().toSecondOfDay() <= end.get(i).toLocalTime().toSecondOfDay())
+//                    return Path.PAGE__ERROR_PAGE_RECORD;
+//
+//
+
+
+//                if((start_time.toLocalTime().getHour() >= start.get(i).toLocalTime().getHour() && start_time.toLocalTime().getHour() <= end.get(i).toLocalTime().getHour()  )
+//                   &&  (ending_time.toLocalTime().getHour() >= end.get(i).toLocalTime().getHour() && ending_time.toLocalTime().getMinute() >= end.get(i).toLocalTime().getMinute())){
+//                        recordDao.addRecord(record);
+//                        return Path.PAGE__MAIN;
+//                    }else return  Path.PAGE__ERROR_PAGE_RECORD;
+
+
+            }
+//                if((start_time.toLocalTime().getHour() <= start.get(i).toLocalTime().getHour()
+//                        &&  ending_time.toLocalTime().getHour() >=  end.get(i).toLocalTime().getHour())
+//                            || (start_time.toLocalTime().getHour() <= start.get(i).toLocalTime().getHour() &&
+//                                 ending_time.toLocalTime().getHour() >= start.get(i).toLocalTime().getHour() &&
+//                                     ending_time.toLocalTime().getHour() <= end.get(i).toLocalTime().getHour())){
+//                    return  Path.PAGE__ERROR_PAGE_RECORD;
+//                }else {
+//                    recordDao.addRecord(record);
+//                    return Path.PAGE__MAIN;
+//                }
+
+
+       return Path.PAGE__ERROR_PAGE_RECORD;
     }
 
 }
