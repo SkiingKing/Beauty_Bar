@@ -42,6 +42,11 @@
             padding: 0 10px;
             float: left;
         }
+        #menu{
+            margin: 15px;
+            padding: 2px;
+        }
+
         #content {
             margin-left: 130px;
             padding: 10px;
@@ -59,22 +64,29 @@
 <div id="container">
     <div id="header">BeautyBar</div>
     <div id ="head_right">
-        <a href="register.jsp">Register</a>
-        <a href="login.jsp">Login</a>
-        <a href="controller?action=logout">Logout</a>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" href="register.jsp">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="login.jsp">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="controller?action=logout">Logout</a>
+        </li>
+    </ul>
     </div>
 
     <div id="sidebar">
         <div id="menu">
-            <ul>
-                <p><li><a href="main.jsp">Main</a></li></p>
-                <p><li><a onclick="location.href='master?action=master'">Masters</a></li></ul></p>
-                <p><li><a onclick="location.href='services?action=service'">Services</a></li></p>
-                <p><li><a onclick="location.href='master_timetable?action=master_timetable'">Time table</a></li></p>
-                <p><li><a onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a></li></p>
-                <p><li><a href="select.jsp">Record</a></li></p>
-                <p><li><a href="xx.jsp">Response</a></li></p>
-            </ul>
+                <a class="nav-link active" href="main.jsp">Main</a>
+                <a class="nav-link" onclick="location.href='master?action=master'">Masters</a>
+                <a class="nav-link" onclick="location.href='services?action=service'">Services</a>
+                <a class="nav-link" onclick="location.href='master_timetable?action=master_timetable'">Time table</a>
+                <a class="nav-link" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a>
+                <a class="nav-link" href="select.jsp">Record</a>
+                <a class="nav-link" href="xx.jsp">Response</a>
+
         </div>
     </div>
 

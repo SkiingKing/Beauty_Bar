@@ -24,7 +24,7 @@ public class UpdateMasterStatus implements Command{
         recordDao.updateMasterStatus(recId);
 
         //write update list
-        List<Record> records = recordDao.getAllRecords();
+        List<Record> records = recordDao.getAllRecords(request.getSession().getAttribute("currentPage"), request.getSession().getAttribute("recordsPerPage"));
 
         request.setAttribute("records",records);
         log.trace("Set the request attribute: records --> " + records);

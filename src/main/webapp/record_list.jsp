@@ -14,9 +14,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
+    <style type="text/css">
+        #center{
+            margin-left: 400px;
+            padding: 5px;
+        }
+    </style>
 </head>
 </head>
 <body>
+
+<p><a href="../main.jsp">Main</a></p>
+
+<div id = "center">
 <main class="m-3">
     <div class="row col-md-6">
         <table class="table table-striped table-bordered table-sm">
@@ -40,6 +50,7 @@
             <td>${records.ending_time}</td>
             <td>${records.service}</td>
             <td>${records.master_name}</td>
+
             <td><button onclick="location.href='record_list?action=deleteRecord&recordId=${records.id}'">Delete</button></td>
             <td><button onclick="location.href='edit_record.jsp'"/>Edit</td>
             <td><button onclick="location.href='record_list?action=update_admin_status&recordId=${records.id}'">Сalculate</button></td>
@@ -79,6 +90,6 @@
         </ul>
     </nav>
 </main>
-
+</div>
 </body>
 </html>

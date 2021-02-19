@@ -7,7 +7,6 @@ import beautybar.vn.entity.Record;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class DeleteRecord implements Command{
@@ -28,7 +27,7 @@ public class DeleteRecord implements Command{
         log.trace("Find record -->" + record);
         recordDao.deleteRecord(recId);
 
-        List<Record> records = recordDao.getAllRecords();
+        List<Record> records = recordDao.getAllRecords(request.getSession().getAttribute("currentPage"), request.getSession().getAttribute("recordsPerPage"));
 
         request.setAttribute("records",records);
         log.trace("Set the request attribute: records --> " + records);

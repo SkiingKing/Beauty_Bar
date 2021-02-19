@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class EditCommand implements Command{
@@ -16,6 +18,10 @@ public class EditCommand implements Command{
     public String execute(HttpServletRequest request) {
 
         log.debug("Command start");
+
+        int currentPage = (int) request.getSession().getAttribute("currentPage");
+        int recordsPerPage = (int) request.getSession().getAttribute("recordsPerPage");
+
 
         int recordId = Integer.parseInt(request.getParameter("recordId"));
         Time start = Time.valueOf(request.getParameter("start"));
@@ -28,10 +34,28 @@ public class EditCommand implements Command{
         RecordDao recordDao = factory.getRecordDAO();
         recordDao.updateAdminRecord(recordId,start,end);
 
-        List<Record> records = recordDao.getAllRecords();
+        List<Record> records = recordDao.getAllRecords(currentPage,recordsPerPage);
+        Collections.sort(records, new Comparator<Record>() {
+            public int compare(Record p1, Record p2) {
+                return p1.getDate().compareTo(p2.getDate());
+            }
+        });
 
         request.setAttribute("records",records);
         log.trace("Set the request attribute: records --> " + records);
+
+        Integer rows = recordDao.getNumberOfRows();
+
+        int nOfPages = rows / recordsPerPage;
+
+        if (nOfPages % recordsPerPage > 0) {
+
+            nOfPages++;
+        }
+
+        request.setAttribute("noOfPages", nOfPages);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("recordsPerPage", recordsPerPage);
 
         log.debug("Command finished");
         return Path.PAGE__ADMIN_LIST;

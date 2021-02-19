@@ -43,6 +43,9 @@ public class RecordDao extends DBManager {
     private static final String GET_ALL_RECORDS =
             "SELECT * FROM record WHERE status_for_admin = 0 limit 10";
 
+    private static final String GET_ALL_RECORDS_L =
+            "SELECT * FROM record WHERE status_for_admin = 0 limit ";
+
     private static final String GET_ALL_RECORDS_BY_MASTER =
             "SELECT * FROM record WHERE stage = 0 AND master_name=?";
 
@@ -142,8 +145,10 @@ public class RecordDao extends DBManager {
      * Returns all records.
      *
      * @return List of records.
+     * @param currentPage
+     * @param recordsPerPage
      */
-    public List<Record> getAllRecords(){
+    public List<Record> getAllRecords(Object currentPage, Object recordsPerPage){
         Connection connection = null;
         PreparedStatement statement = null;
         List<Record> list  = new ArrayList<>();
@@ -186,6 +191,50 @@ public class RecordDao extends DBManager {
         return list;
 
     }
+    public List<Record> getAllRecords(int start,int total){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        List<Record> list  = new ArrayList<>();
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(GET_ALL_RECORDS_L+(start-1)+","+total);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Record record = new Record();
+
+                Long record_id = rs.getLong("record_id");
+                Long user_id = rs.getLong("users_id");
+                Date date = rs.getDate("date");
+                boolean stage = rs.getBoolean("stage");
+                boolean status_for_admin = rs.getBoolean("status_for_admin");
+                Time start_time = rs.getTime("start_time");
+                Time ending_time = rs.getTime("ending_time");
+                String service = rs.getString("service");
+                String name_master = rs.getString("master_name");
+
+                record.setId(record_id);
+                record.setUser_id(user_id);
+                record.setDate(date);
+                record.setStage(stage);
+                record.setStatus_for_admin(status_for_admin);
+                record.setStarting_time(start_time);
+                record.setEnding_time(ending_time);
+                record.setService(service);
+                record.setMaster_name(name_master);
+
+                list.add(record);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+
+    }
+
     /**
      * Returns all records by master.
      *
