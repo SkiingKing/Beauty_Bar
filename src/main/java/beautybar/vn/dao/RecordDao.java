@@ -41,7 +41,7 @@ public class RecordDao extends DBManager {
             "SELECT name,estimat_time FROM services";
 
     private static final String GET_ALL_RECORDS =
-            "SELECT * FROM record WHERE status_for_admin = 0";
+            "SELECT * FROM record WHERE status_for_admin = 0 limit 10";
 
     private static final String GET_ALL_RECORDS_BY_MASTER =
             "SELECT * FROM record WHERE stage = 0 AND master_name=?";
@@ -60,6 +60,9 @@ public class RecordDao extends DBManager {
 
     private static final String UPDATE_TIMESLOT =
             "UPDATE record SET start_time =? , ending_time =? WHERE record_id=?";
+
+    private static final String NUMBER_OF_ROWS =
+            "SELECT count(record_id) FROM record";
 
 
 
@@ -183,7 +186,6 @@ public class RecordDao extends DBManager {
         return list;
 
     }
-
     /**
      * Returns all records by master.
      *
@@ -404,7 +406,6 @@ public class RecordDao extends DBManager {
      * @param end
      */
     public void updateAdminRecord(int id,Time start,Time end) {
-        Connection conn = null;
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -428,7 +429,6 @@ public class RecordDao extends DBManager {
      */
 
     public void deleteRecord(int id) {
-        Connection conn = null;
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -443,8 +443,12 @@ public class RecordDao extends DBManager {
         }
 
     }
+
+    /**
+     * Master update status of record.
+     * @param id
+     */
     public void updateMasterStatus(int id) {
-        Connection conn = null;
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -459,5 +463,30 @@ public class RecordDao extends DBManager {
         }
 
     }
+
+    /**
+     * Return number of record rows.
+     * @return Integer
+     */
+    public Integer getNumberOfRows() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        Integer numOfRows = 0;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(NUMBER_OF_ROWS);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return numOfRows;
+    }
+
 
 }

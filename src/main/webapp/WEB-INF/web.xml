@@ -81,6 +81,15 @@
         <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>AdminListCommand</servlet-name>
+        <url-pattern>/AdminListCommand</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminListCommand</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
 
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>

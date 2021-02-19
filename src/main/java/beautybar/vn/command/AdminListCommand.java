@@ -13,12 +13,29 @@ public class AdminListCommand implements Command{
     public String execute(HttpServletRequest request) {
 
 
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+
+
         DaoFactory factory = DaoFactory.getInstance();
         RecordDao recordDao =factory.getRecordDAO();
 
         List<Record> records = recordDao.getAllRecords();
 
         request.setAttribute("records",records);
+
+        int rows = recordDao.getNumberOfRows();
+
+        int nOfPages = rows / recordsPerPage;
+
+        if (nOfPages % recordsPerPage > 0) {
+
+            nOfPages++;
+        }
+
+        request.setAttribute("noOfPages", nOfPages);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("recordsPerPage", recordsPerPage);
 
 
         return Path.PAGE__ADMIN_LIST;

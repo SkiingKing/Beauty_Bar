@@ -36,6 +36,8 @@ public class CommandFactory {
         comands.put("update_admin_status",new UpdateSatusForAdmin());
         comands.put("edit",new EditCommand());
         comands.put("update_master_status",new UpdateMasterStatus());
+        comands.put("AdminListCommand",new AdminListCommand());
+
 
     }
 

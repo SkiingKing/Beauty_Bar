@@ -5,6 +5,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>BeautyBar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
     <style type="text/css">
 
         body {
@@ -68,7 +71,7 @@
                 <p><li><a onclick="location.href='master?action=master'">Masters</a></li></ul></p>
                 <p><li><a onclick="location.href='services?action=service'">Services</a></li></p>
                 <p><li><a onclick="location.href='master_timetable?action=master_timetable'">Time table</a></li></p>
-                <p><li><a onclick="location.href='record_list?action=admin_list'">Admin list</a></li></p>
+                <p><li><a onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a></li></p>
                 <p><li><a href="select.jsp">Record</a></li></p>
                 <p><li><a href="xx.jsp">Response</a></li></p>
             </ul>
@@ -77,11 +80,30 @@
 
 
     <div id="content">
-        <h2>Text</h2>
-        <p>  Text types in literature form the basic styles of writing. Factual texts merely seek to inform,
-            whereas literary texts seek to entertain or otherwise engage the reader by using creative language
-            and imagery. There are many aspects to literary writing, and many ways to analyse it,
-            but four basic categories are descriptive, narrative, expository, and argumentative.</p>
+<%--        <main class="m-3">--%>
+
+<%--            <h1>Show countries</h1>--%>
+
+<%--            <form action="record_list">--%>
+
+<%--                <input type="hidden" name="currentPage" value="1">--%>
+
+<%--                <div class="form-group col-md-4">--%>
+
+<%--                    <label for="records">Select records per page:</label>--%>
+
+<%--                    <select class="form-control" id="records" name="recordsPerPage">--%>
+<%--                        <option value="5">5</option>--%>
+<%--                        <option value="10" selected>10</option>--%>
+<%--                        <option value="15">15</option>--%>
+<%--                    </select>--%>
+
+<%--                </div>--%>
+
+<%--                <button type="submit" class="btn btn-primary">Submit</button>--%>
+
+<%--            </form>--%>
+<%--        </main>--%>
         <p>  Text types in literature form the basic styles of writing. Factual texts merely seek to inform,
             whereas literary texts seek to entertain or otherwise engage the reader by using creative language
             and imagery. There are many aspects to literary writing, and many ways to analyse it,
