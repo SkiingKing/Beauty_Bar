@@ -116,8 +116,7 @@
         <th>Ending time</th>
         <th>Service</th>
     </tr>
-<%--    <jsp:useBean id="records" class="beautybar.vn.command.TimetableCommand" scope="request"/>--%>
-<%--    <c:forEach var="record" items="${records.records}">--%>
+
     <c:forEach var="records" items="${records}">
         <tr>
             <td>${records.id}</td>
@@ -130,7 +129,6 @@
         </tr>
     </c:forEach>
 
-<%--    pattern="yy-MM-dd"--%>
 </table>
     </div>
         </main>

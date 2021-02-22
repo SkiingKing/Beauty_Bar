@@ -16,11 +16,10 @@
     <form method="post" action="controller?action=record">
         <p><b>Master:</b>
             <select name="masters" required>
-                <jsp:useBean id="item" class="beautybar.vn.Test" scope="request"/>
                 <option disabled>Select master</option>
                 <option> </option>
-                <c:forEach var="item" items="${item.list}">
-                    <option>${item}</option>
+                <c:forEach var="masters" items="${masters}">
+                    <option>${masters.name}</option>
                 </c:forEach>
             </select>
         <p> <b>Data:</b></p>

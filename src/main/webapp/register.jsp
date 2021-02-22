@@ -14,11 +14,11 @@
    <div id = "center">
    <form method="post" action="controller?action=register">
        <p><b>Email:</b>
-       <p><input type="text" name="email" size="10"/></p>
+       <p><input type="text" name="email" size="10" required/></p>
        <p><b>Name and surname:</b>
-       <p><input type="text" name="nameandsurname" size="10"/></p>
+       <p><input type="text" name="nameandsurname" size="10" required/></p>
        <p><b>Password:</b>
-       <p><input type="password" name="password" size="10" /></p>
+       <p><input type="password" name="password" size="10" required/></p>
 
        <p><input type="submit" value="Register" /></p>
    </form>

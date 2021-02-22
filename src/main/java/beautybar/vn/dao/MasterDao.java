@@ -78,12 +78,12 @@ public class MasterDao extends DBManager {
      * @param service
      * @return List<String>
      */
-    public List<String> getMasterByService(String service) {
+    public List<Master> getMasterByService(String service) {
         Master master;
         Connection connection = null;
         PreparedStatement statement = null;
 
-        List<String> list = new ArrayList<>();
+        List<Master> list = new ArrayList<>();
 
         try {
             connection = getConnection();
@@ -99,8 +99,8 @@ public class MasterDao extends DBManager {
 
                 master = new Master();
                 master.setName(name);
-                list.add(name);
-                master.setMastersByService(list);
+                list.add(master);
+                master.setMastersByService(master.getMasterByService());
 
             }
 

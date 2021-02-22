@@ -23,6 +23,7 @@ public class EditCommand implements Command{
         int recordsPerPage = (int) request.getSession().getAttribute("recordsPerPage");
 
 
+        // write new time
         int recordId = Integer.parseInt(request.getParameter("recordId"));
         Time start = Time.valueOf(request.getParameter("start"));
         Time end = Time.valueOf(request.getParameter("end"));
@@ -32,9 +33,13 @@ public class EditCommand implements Command{
 
         DaoFactory factory  = DaoFactory.getInstance();
         RecordDao recordDao = factory.getRecordDAO();
+        // update record
         recordDao.updateAdminRecord(recordId,start,end);
 
+        // give new list of records
         List<Record> records = recordDao.getAllRecords(currentPage,recordsPerPage);
+
+        // sort list by date
         Collections.sort(records, new Comparator<Record>() {
             public int compare(Record p1, Record p2) {
                 return p1.getDate().compareTo(p2.getDate());
@@ -44,8 +49,8 @@ public class EditCommand implements Command{
         request.setAttribute("records",records);
         log.trace("Set the request attribute: records --> " + records);
 
+        // data for pagination
         Integer rows = recordDao.getNumberOfRows();
-
         int nOfPages = rows / recordsPerPage;
 
         if (nOfPages % recordsPerPage > 0) {

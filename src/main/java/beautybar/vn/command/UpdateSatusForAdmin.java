@@ -23,7 +23,6 @@ public class UpdateSatusForAdmin implements Command{
         RecordDao recordDao = factory.getRecordDAO();
         recordDao.updateAdminStatus(recId);
 
-
         //write update list
         int a= (int) request.getSession().getAttribute("currentPage");
         int b= (int) request.getSession().getAttribute("recordsPerPage");

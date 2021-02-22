@@ -8,11 +8,8 @@ import beautybar.vn.entity.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+
 
 public class LoginCommand implements Command {
 
@@ -21,29 +18,38 @@ public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
 
+        log.debug("Command start");
+
+        String errorMessage;
+        String forward = Path.PAGE__ERROR_PAGE;
+
         HttpSession session = request.getSession();
 
-        String name = request.getParameter("email");
+        String email = request.getParameter("email");
+        log.trace("Email: "+ email);
         String password = request.getParameter("password");
+        log.trace("Password: "+ password);
 
 
         DaoFactory factory = DaoFactory.getInstance();
         UserDAO userDAO = factory.getUserDAO();
-        User user = userDAO.getUser(name, password);
 
-
-
+        // check user in BD
+        User user = userDAO.getUser(email, password);
         String resultPage = (user == null) ? Path.PAGE__LOGIN : "controller?action=main";
-        Role userRole = Role.getRole(user);
 
+        // get role
+        Role userRole = Role.getRole(user);
         session.setAttribute("userRole", userRole);
         log.trace("Set the session attribute: userRole --> " + userRole);
 
         if (user == null) {
-            request.setAttribute("notExists", "This user not exists");
-        } else {
-            request.getSession().setAttribute("user", user);
-            session.setAttribute("user",user);
+            errorMessage = "User not found,check your email or password!";
+            request.setAttribute("errorMessage", errorMessage);
+            log.error("errorMessage --> " + errorMessage);
+            return forward;
+        }else {
+            session.setAttribute("user", user);
         }
 
         return resultPage;

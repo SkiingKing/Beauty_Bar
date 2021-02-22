@@ -15,7 +15,6 @@ public class DeleteRecord implements Command{
     public String execute(HttpServletRequest request) {
 
         log.debug("Command start");
-
         String recordId = request.getParameter("recordId");
         log.trace("recordList --> " + recordId);
         int recId=Integer.parseInt(recordId);
@@ -25,11 +24,14 @@ public class DeleteRecord implements Command{
         RecordDao recordDao = factory.getRecordDAO();
         Record record = recordDao.findRecordById(recId);
         log.trace("Find record -->" + record);
+
+        // delete record
         recordDao.deleteRecord(recId);
 
         int a= (int) request.getSession().getAttribute("currentPage");
         int b= (int) request.getSession().getAttribute("recordsPerPage");
 
+        // updated list
         List<Record> records = recordDao.getAllRecords(a,b);
 
         request.setAttribute("records",records);

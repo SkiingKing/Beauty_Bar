@@ -118,12 +118,12 @@ public class UserDAO extends DBManager {
     /**
      * Return user if he is in the bd.
      *
-     * @param name
+     * @param email
      * @param password
      * @return user
      */
 
-    public User getUser(String name, String password) {
+    public User getUser(String email, String password) {
         User user = null;
 
         Connection connection = null;
@@ -134,7 +134,7 @@ public class UserDAO extends DBManager {
             statement = connection.prepareStatement(GET__USER);
 
             statement.setString(1,password);
-            statement.setString(2,name);
+            statement.setString(2,email);
 
             ResultSet rs = statement.executeQuery();
 
@@ -143,7 +143,7 @@ public class UserDAO extends DBManager {
                 int role_id = rs.getInt(2);
                 user = new User();
                 user.setId(id);
-                user.setEmail(name);
+                user.setEmail(email);
                 user.setPassword(password);
                 user.setRoleId(role_id);
             }

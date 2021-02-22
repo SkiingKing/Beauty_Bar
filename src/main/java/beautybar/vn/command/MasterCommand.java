@@ -15,16 +15,15 @@ public class MasterCommand implements Command{
     @Override
     public String execute(HttpServletRequest request) {
 
-
+        log.debug("Command start!");
         DaoFactory factory = DaoFactory.getInstance();
         MasterDao masterDao = factory.getMasterDAO();
 
+        //get list all masters
         List<Master> masters = masterDao.getMasters();
-
-
-
         request.setAttribute("masters",masters);
 
+        log.debug("Command end!");
         return Path.PAGE__MASTERS;
     }
 }

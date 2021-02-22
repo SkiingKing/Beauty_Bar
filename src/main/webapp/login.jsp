@@ -278,8 +278,8 @@
 
                 <!-- Login Form -->
                 <form method="post" action="controller?action=login">
-                    <input type="text" id="email" class="fadeIn second" name="email"  placeholder="email"/>
-                    <input type="text" name="password" id="password" class="fadeIn third" name="login" placeholder="password">
+                    <input type="text" id="email" class="fadeIn second" name="email"  placeholder="email" required/>
+                    <input type="text" name="password" id="password" class="fadeIn third" name="login" placeholder="password" required>
                     <input type="submit" class="fadeIn fourth" value="Login">
                 </form>
 
@@ -290,14 +290,6 @@
 
             </div>
         </div>
-<%-- <form method="post" action="controller?action=login">--%>
-<%--       <p><b>Email:</b>--%>
-<%--    <p><input type="text" id="email" class="fadeIn second" name="email"  placeholder="email"/></p>--%>
-<%--       <p><b>Password:</b>--%>
-<%--    <p><input type="password" name="password"  size="10" /></p>--%>
-<%--    <p><input type="submit" value="Login" /></p>--%>
-
-<%--  </form>--%>
 
 </body>
 </html>

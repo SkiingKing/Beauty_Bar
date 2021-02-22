@@ -15,6 +15,7 @@ public class Path {
     public static final String PAGE__MASTER_TIMETABLE = "jsp/master_timetable.jsp";
     public static final String PAGE__ADMIN_LIST = "record_list.jsp";
     public static final String PAGE__EDIT = "edit_record.jsp";
+    public static final String PAGE__ERROR_PAGE = "jsp/error_message.jsp";
 
 
 }
