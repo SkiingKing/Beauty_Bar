@@ -28,14 +28,17 @@ public class TimetableCommand implements Command{
     @Override
     public String execute(HttpServletRequest request) {
 
+        HttpSession session = request.getSession();
         User user = (User) request.getSession().getAttribute("user");
 
         DaoFactory factory = DaoFactory.getInstance();
         RecordDao recordDao = factory.getRecordDAO();
         UserDAO userDAO  = factory.getUserDAO();
 
-        String name = userDAO.findMasterByEmail(user.getEmail());
-        records = recordDao.getAllRecordsByMaster(name);
+        String master = userDAO.findMasterByEmail(user.getEmail());
+        records = recordDao.getAllRecordsByMaster(master);
+
+        session.setAttribute("master",master);
 
         Collections.sort(records, new Comparator<Record>() {
             public int compare(Record p1, Record p2) {

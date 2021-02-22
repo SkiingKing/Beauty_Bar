@@ -9,21 +9,26 @@ import beautybar.vn.entity.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.sql.Time;
 import java.sql.Date;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 
-public class RecordCommand implements Command{
+public class RecordCommand implements Command {
 
     private static final Logger log = Logger.getLogger(RecordCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
 
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         Master master = (Master) request.getSession().getAttribute("name_of_service");
 
         String name_of_master = request.getParameter("masters");
@@ -35,17 +40,17 @@ public class RecordCommand implements Command{
         RecordDao recordDao = factory.getRecordDAO();
         Record record = new Record();
 
-        /**
-         * Calculation ending time of service by service
-         */
+
+         //Calculation ending time of service by service
+
 
         LocalTime s = start_time.toLocalTime();
-        HashMap<String,Long> map = recordDao.getTimeByService();
+        HashMap<String, Long> map = recordDao.getTimeByService();
         Long temp = null;
 
-            for ( String key : map.keySet() ) {
-                    if(key.equals(master.getServices())) temp = map.get(key);
-            }
+        for (String key : map.keySet()) {
+            if (key.equals(master.getServices())) temp = map.get(key);
+        }
         ending_time = Time.valueOf(s.plusMinutes(temp));
 
         //save data in record
@@ -56,80 +61,61 @@ public class RecordCommand implements Command{
         record.setService(master.getServices());
         record.setMaster_name(name_of_master);
 
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+
+        Set<ConstraintViolation<Record>> validations = validator.validate(record);
+        for(ConstraintViolation<Record> violation: validations) {
+            if (validations.size() > 0) {
+                log.error("Error validation:" + violation.getMessage() + violation.getInvalidValue());
+                request.setAttribute("error_message",violation.getMessage());
+            }
+        }
+
+        validatorFactory.close();
+
         log.info(record.getStarting_time());
         log.info(record.getEnding_time());
 
 
-        /**
-         * Check if is free time slot
-         */
+        //Check if is free time slot
 
-        List<Time> start = recordDao.getStartTimeByMasterAndDate(name_of_master,date);
-        List<Time> end = recordDao.getEndingTimeByMasterAndDate(name_of_master,date);
 
-        if(start.isEmpty()) {
+        List<Time> start = recordDao.getStartTimeByMasterAndDate(name_of_master, date);
+        List<Time> end = recordDao.getEndingTimeByMasterAndDate(name_of_master, date);
+
+        if (start.isEmpty()) {
             recordDao.addRecord(record);
             return Path.PAGE__MAIN;
-        }else
-            for(int i=0;i< start.size();i++){
+        } else
+            for (int i = 0; i < start.size(); i++) {
                 if (start_time.equals(start.get(i))) return Path.PAGE__ERROR_PAGE_RECORD;
-                if(ending_time.equals(end.get(i))) return Path.PAGE__ERROR_PAGE_RECORD;
+                if (ending_time.equals(end.get(i))) return Path.PAGE__ERROR_PAGE_RECORD;
 
 
                 int sa = start_time.toLocalTime().getHour();
-                int en =end.get(i).toLocalTime().getHour();
+                int en = end.get(i).toLocalTime().getHour();
                 int sam = start_time.toLocalTime().getMinute();
                 int enm = end.get(i).toLocalTime().getMinute();
 
-                int ens =ending_time.toLocalTime().toSecondOfDay();
+                int ens = ending_time.toLocalTime().toSecondOfDay();
                 int egs = end.get(i).toLocalTime().toSecondOfDay();
 
-                 if(start_time.before(start.get(i)) && ending_time.before(end.get(i))) {
-                     recordDao.addRecord(record);
-                     return Path.PAGE__MAIN;
-                 }
+                if (start_time.before(start.get(i)) && ending_time.before(end.get(i))) {
+                    recordDao.addRecord(record);
+                    return Path.PAGE__MAIN;
+                }
 
-                if(sa == en && sam >= enm) {
-                    if(ens - egs >= (int) (temp * 60)) {
+                if (sa == en && sam >= enm) {
+                    if (ens - egs >= (int) (temp * 60)) {
                         recordDao.addRecord(record);
                         return Path.PAGE__MAIN;
-                    }else return Path.PAGE__ERROR_PAGE_RECORD;
+                    } else return Path.PAGE__ERROR_PAGE_RECORD;
                 }
 
 
-
-//                int a = start_time.toLocalTime().toSecondOfDay();
-//                int b =start.get(i).toLocalTime().toSecondOfDay();
-//                int d=end.get(i).toLocalTime().toSecondOfDay();
-//
-//                if(start_time.toLocalTime().toSecondOfDay() >= start.get(i).toLocalTime().toSecondOfDay()
-//                        &&  start_time.toLocalTime().toSecondOfDay() <= end.get(i).toLocalTime().toSecondOfDay())
-//                    return Path.PAGE__ERROR_PAGE_RECORD;
-//
-//
-
-
-//                if((start_time.toLocalTime().getHour() >= start.get(i).toLocalTime().getHour() && start_time.toLocalTime().getHour() <= end.get(i).toLocalTime().getHour()  )
-//                   &&  (ending_time.toLocalTime().getHour() >= end.get(i).toLocalTime().getHour() && ending_time.toLocalTime().getMinute() >= end.get(i).toLocalTime().getMinute())){
-//                        recordDao.addRecord(record);
-//                        return Path.PAGE__MAIN;
-//                    }else return  Path.PAGE__ERROR_PAGE_RECORD;
-
-
+                return Path.PAGE__ERROR_PAGE_RECORD;
             }
-//                if((start_time.toLocalTime().getHour() <= start.get(i).toLocalTime().getHour()
-//                        &&  ending_time.toLocalTime().getHour() >=  end.get(i).toLocalTime().getHour())
-//                            || (start_time.toLocalTime().getHour() <= start.get(i).toLocalTime().getHour() &&
-//                                 ending_time.toLocalTime().getHour() >= start.get(i).toLocalTime().getHour() &&
-//                                     ending_time.toLocalTime().getHour() <= end.get(i).toLocalTime().getHour())){
-//                    return  Path.PAGE__ERROR_PAGE_RECORD;
-//                }else {
-//                    recordDao.addRecord(record);
-//                    return Path.PAGE__MAIN;
-//                }
-
-
-       return Path.PAGE__ERROR_PAGE_RECORD;
+        return Path.PAGE__ERROR_PAGE_RECORD;
     }
-
 }

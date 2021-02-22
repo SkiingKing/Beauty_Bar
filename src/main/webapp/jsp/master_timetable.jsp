@@ -11,6 +11,9 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
 </head>
 <body>
 <style type="text/css">
@@ -25,7 +28,7 @@
         margin-top: 0;
     }
     #container {
-        width: 500px;
+        width: max-content;
         margin: 0 auto;
         background: #f0f0f0;
     }
@@ -69,25 +72,42 @@
     </div>
 
     <div id="sidebar">
-        <p><a href="../main.jsp">Main</a></p>
-        <form method="post" action="controller?action=master">
-            <p><input type="submit" value="Masters" /></p>
-        </form>
-        <form method="post" action="controller?action=service">
-            <p><input type="submit" value="Services" /></p>
-        </form>
-        <p><a href="../select.jsp">Record</a></p>
-        <p><a href="xx.jsp">Response</a></p>
-        <form method="post" action="controller?action=update_status_by_master">
-            <%--        <p><a href="master_timetable.jsp"  type="submit">Time table</a></p>--%>
-            <p><input type="submit" value="Time table" /></p>
-        </form>
+        <div id="menu">
+            <a class="nav-link active" href="main.jsp">Main</a>
+            <a class="nav-link" onclick="location.href='master?action=master'">Masters</a>
+            <a class="nav-link" onclick="location.href='services?action=service'">Services</a>
+            <a class="nav-link" href="xx.jsp">Response</a>
+            <c:choose>
+                <%--===========================================================================
+                               This way we define the USER MENU.
+                 ===========================================================================--%>
+
+                <c:when test="${userRole.name == 'user' }">
+                    <a class="nav-link" href="select.jsp">Record</a>
+                </c:when>
+
+                <%--===========================================================================
+                This way we define the Master MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'master' }">
+                    <a class="nav-link" onclick="location.href='master_timetable?action=master_timetable'">Time table</a>
+                </c:when>
+
+                <%--===========================================================================
+                This way we define the Admin MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'admin'}">
+                    <a class="nav-link" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a>
+                </c:when>
+            </c:choose>
+        </div>
     </div>
 
 
     <div id="content">
-
-<table border="1">
+        <main class="m-3">
+            <div class="row col-md-6">
+                <table class="table table-striped table-bordered table-sm">
     <tr>
         <th>ID</th>
         <th>Date</th>
@@ -106,13 +126,14 @@
             <td>${records.starting_time}</td>
             <td>${records.ending_time}</td>
             <td>${records.service}</td>
-            <td><button onclick="location.href='master_timetable?action=update_master_status&recordId=${records.id}'">Ready</button></td>
+            <td><button onclick="location.href='master_timetable?action=update_master_status&recordId=${records.id}&master=${records.master_name}'">Ready</button></td>
         </tr>
     </c:forEach>
 
 <%--    pattern="yy-MM-dd"--%>
 </table>
     </div>
+        </main>
     <div id="footer">instagram:@BeutyBar</div>
 </div>
 

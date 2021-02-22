@@ -7,6 +7,7 @@ import beautybar.vn.entity.Record;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class UpdateMasterStatus implements Command{
@@ -15,6 +16,9 @@ public class UpdateMasterStatus implements Command{
     public String execute(HttpServletRequest request) {
 
         log.debug("Command start");
+
+        HttpSession session = request.getSession();
+
         String recordId = request.getParameter("recordId");
         log.trace("recordList --> " + recordId);
         int recId=Integer.parseInt(recordId);
@@ -24,7 +28,7 @@ public class UpdateMasterStatus implements Command{
         recordDao.updateMasterStatus(recId);
 
         //write update list
-        List<Record> records = recordDao.getAllRecords(request.getSession().getAttribute("currentPage"), request.getSession().getAttribute("recordsPerPage"));
+        List<Record> records = recordDao.getAllRecordsByMaster((String) session.getAttribute("master"));
 
         request.setAttribute("records",records);
         log.trace("Set the request attribute: records --> " + records);

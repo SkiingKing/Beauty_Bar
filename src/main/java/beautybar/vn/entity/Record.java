@@ -1,5 +1,7 @@
 package beautybar.vn.entity;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -10,6 +12,7 @@ public class Record {
 
     private Long user_id;
 
+    @NotNull
     private Date date;
 
     private boolean stage;
@@ -20,8 +23,10 @@ public class Record {
 
     private Time ending_time;
 
+    @NotNull
     private String service;
 
+    @NotNull
     private String master_name;
 
     public void setUser_id(Long user_id) {
@@ -97,5 +102,20 @@ public class Record {
 
     public void setEnding_time(Time ending_time) {
         this.ending_time = ending_time;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "id=" + id +
+                ", user_id=" + user_id +
+                ", date=" + date +
+                ", stage=" + stage +
+                ", status_for_admin=" + status_for_admin +
+                ", starting_time=" + starting_time +
+                ", ending_time=" + ending_time +
+                ", service='" + service + '\'' +
+                ", master_name='" + master_name + '\'' +
+                '}';
     }
 }

@@ -75,4 +75,13 @@ public class Master {
     }
 
 
+    @Override
+    public String toString() {
+        return "Master{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", services='" + services + '\'' +
+                ", rate=" + rate + '}';
+    }
 }

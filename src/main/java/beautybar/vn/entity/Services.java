@@ -54,4 +54,14 @@ public class Services {
     public void setTime_of_service(Long time_of_service) {
         this.time_of_service = time_of_service;
     }
+
+    @Override
+    public String toString() {
+        return "Services{" +
+                "id=" + id +
+                ", name_of_services='" + name_of_services + '\'' +
+                ", price=" + price +
+                ", time_of_service=" + time_of_service +
+                '}';
+    }
 }

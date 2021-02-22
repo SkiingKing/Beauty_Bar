@@ -2,7 +2,7 @@ package beautybar.vn.entity;
 
 public enum Role {
 
-    USER, ADMIN, GUEST,MASTER;
+    G,USER,ADMIN,MASTER;
 
     public static Role getRole(User user) {
         int roleId = user.getRoleId();

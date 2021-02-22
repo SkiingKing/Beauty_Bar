@@ -1,4 +1,5 @@
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="beautybar.vn.entity.Role" %>
 <html>
@@ -61,6 +62,10 @@
     </style>
 </head>
 <body>
+
+
+
+
 <div id="container">
     <div id="header">BeautyBar</div>
     <div id ="head_right">
@@ -82,40 +87,40 @@
                 <a class="nav-link active" href="main.jsp">Main</a>
                 <a class="nav-link" onclick="location.href='master?action=master'">Masters</a>
                 <a class="nav-link" onclick="location.href='services?action=service'">Services</a>
-                <a class="nav-link" onclick="location.href='master_timetable?action=master_timetable'">Time table</a>
-                <a class="nav-link" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a>
-                <a class="nav-link" href="select.jsp">Record</a>
-                <a class="nav-link" href="xx.jsp">Response</a>
+                 <a class="nav-link" href="xx.jsp">Response</a>
+            <c:choose>
+                <%--===========================================================================
+                               This way we define the USER MENU.
+                 ===========================================================================--%>
+
+                <c:when test="${userRole.name == 'user' }">
+                    <a class="nav-link" href="select.jsp">Record</a>
+                </c:when>
+
+                <%--===========================================================================
+                This way we define the Master MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'master' }">
+                    <a class="nav-link" onclick="location.href='master_timetable?action=master_timetable'">Time table</a>
+                </c:when>
+
+                <%--===========================================================================
+                This way we define the Admin MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'admin'}">
+                    <a class="nav-link" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a>
+                </c:when>
+            </c:choose>
+
+
+
 
         </div>
     </div>
 
 
     <div id="content">
-<%--        <main class="m-3">--%>
 
-<%--            <h1>Show countries</h1>--%>
-
-<%--            <form action="record_list">--%>
-
-<%--                <input type="hidden" name="currentPage" value="1">--%>
-
-<%--                <div class="form-group col-md-4">--%>
-
-<%--                    <label for="records">Select records per page:</label>--%>
-
-<%--                    <select class="form-control" id="records" name="recordsPerPage">--%>
-<%--                        <option value="5">5</option>--%>
-<%--                        <option value="10" selected>10</option>--%>
-<%--                        <option value="15">15</option>--%>
-<%--                    </select>--%>
-
-<%--                </div>--%>
-
-<%--                <button type="submit" class="btn btn-primary">Submit</button>--%>
-
-<%--            </form>--%>
-<%--        </main>--%>
         <p>  Text types in literature form the basic styles of writing. Factual texts merely seek to inform,
             whereas literary texts seek to entertain or otherwise engage the reader by using creative language
             and imagery. There are many aspects to literary writing, and many ways to analyse it,
@@ -132,5 +137,6 @@
     </div>
     <div id="footer">instagram:@BeutyBar</div>
 </div>
+
 </body>
 </html>

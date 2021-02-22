@@ -10,6 +10,9 @@
 <html>
 <head>
     <title>Services</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
     <style type="text/css">
 
         body {
@@ -68,26 +71,43 @@
     </div>
 
     <div id="sidebar">
-        <p><a href="../main.jsp">Main</a></p>
+        <div id="menu">
+            <a class="nav-link active" href="main.jsp">Main</a>
+            <a class="nav-link" onclick="location.href='master?action=master'">Masters</a>
+            <a class="nav-link" onclick="location.href='services?action=service'">Services</a>
+            <a class="nav-link" href="xx.jsp">Response</a>
+            <c:choose>
+                <%--===========================================================================
+                               This way we define the USER MENU.
+                 ===========================================================================--%>
 
-        <form method="post" action="controller?action=master">
-            <p><input type="submit" value="Masters" /></p>
-        </form>
+                <c:when test="${userRole.name == 'user' }">
+                    <a class="nav-link" href="select.jsp">Record</a>
+                </c:when>
 
-        <form method="post" action="controller?action=service">
-            <p><input type="submit" value="Services" /></p>
-        </form>
+                <%--===========================================================================
+                This way we define the Master MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'master' }">
+                    <a class="nav-link" onclick="location.href='master_timetable?action=master_timetable'">Time table</a>
+                </c:when>
 
-        <p><a href="../select.jsp">Record</a></p>
-        <p><a href="xx.jsp">Response</a></p>
-        <form method="post" action="controller?action=update_status_by_master">
-            <p><input type="submit" value="Time table" /></p>
-        </form>
+                <%--===========================================================================
+                This way we define the Admin MENU.
+                ===========================================================================--%>
+                <c:when test="${userRole.name == 'admin'}">
+                    <a class="nav-link" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a>
+                </c:when>
+            </c:choose>
+        </div>
     </div>
 
 
     <div id="content">
-        <table border="1">
+        <div id = "center">
+            <main class="m-3">
+                <div class="row col-md-6">
+                    <table class="table table-striped table-bordered table-sm">
             <tr>
                 <th>Name</th>
                 <th>Price</th>
@@ -104,6 +124,10 @@
 
         </table>
 
+                    </table>
+                </div>
+            </main>
+        </div>
     </div>
     <div id="footer">instagram:@BeutyBar</div>
 </div>
