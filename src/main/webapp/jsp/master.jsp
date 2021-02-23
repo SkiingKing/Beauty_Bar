@@ -1,4 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: shvep
@@ -6,10 +8,18 @@
   Time: 09:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
+
+<%@ page isELIgnored="false" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<%@ page session="true" %>
+
+<html lang="${sessionScope.lang}">
+
 <head>
     <title>Title</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
@@ -64,9 +74,17 @@
 <div id="container">
     <div id="header">BeautyBar</div>
     <div id ="head_right">
-        <a href="../register.jsp">Register</a>
-        <a href="/login.jsp">Login</a>
-        <a href="controller?action=logout">Logout</a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="register.jsp"><fmt:message key="header.register"/></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.jsp"><fmt:message key="header.login"/></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="controller?action=logout"><fmt:message key="header.logout"/></a>
+            </li>
+        </ul>
     </div>
 
     <div id="sidebar">
