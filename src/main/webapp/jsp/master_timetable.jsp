@@ -82,8 +82,12 @@
                 <a class="nav-link" href="login.jsp"><fmt:message key="header.login"/></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="controller?action=logout"><fmt:message key="header.logout"/></a>
+                <c:if test="${userRole.name == 'master' }">
+                    <a class="nav-link" href="controller?action=logout"><fmt:message key="header.logout"/></a>
+                </c:if>
             </li>
+            <input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='master_timetable?action=master_timetable&sessionLocale=ua'">
+            <input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='master_timetable?action=master_timetable&sessionLocale=en'">
         </ul>
     </div>
 

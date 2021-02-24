@@ -33,8 +33,8 @@
 <body>
 <ul>
     <li><a href="../main.jsp"><fmt:message key="menu.main" /></a></li>
-    <li><a href="record_list?action=admin_list&currentPage=1&recordsPerPage=10&sessionLocale=en"><fmt:message key="english" /></a></li>
-    <li><a href="record_list?action=admin_list&currentPage=1&recordsPerPage=10&sessionLocale=ua"><fmt:message key="ukrainian" /></a></li>
+    <input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='record_list?action=admin_list&currentPage=1&recordsPerPage=10&sessionLocale=ua'">
+    <input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='record_list?action=admin_list&currentPage=1&recordsPerPage=10&sessionLocale=en'">
 </ul>
 <div id = "center">
 <main class="m-3">

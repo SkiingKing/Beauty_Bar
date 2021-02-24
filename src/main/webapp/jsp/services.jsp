@@ -81,10 +81,12 @@
                 <a class="nav-link" href="login.jsp"><fmt:message key="header.login"/></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="controller?action=logout"><fmt:message key="header.logout"/></a>
+                <c:if test="${userRole.name == 'user' || userRole.name == 'master' || userRole.name == 'admin'}">
+                    <a class="nav-link" href="controller?action=logout"><fmt:message key="header.logout"/></a>
+                </c:if>
             </li>
-            <li><a href="main.jsp?sessionLocale=en"><fmt:message key="english" /></a></li>
-            <li><a href="main.jsp?sessionLocale=ua"><fmt:message key="ukrainian" /></a></li>
+            <input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='services?action=service&sessionLocale=ua'">
+            <input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='services?action=service&sessionLocale=en'">
         </ul>
     </div>
 

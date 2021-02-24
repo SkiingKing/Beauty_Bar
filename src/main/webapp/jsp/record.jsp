@@ -33,9 +33,10 @@
                 </c:forEach>
             </select>
         <p> <b><fmt:message key="record_admin_list_date"/></b></p>
-        <p><input type="text" name="data"  size="10" placeholder="yy-mm-dd" required/></p>
+        <p><input type="text" name="data"  size="10" placeholder="<fmt:message key="record.pattern_date"/>" required/></p>
+
         <b><fmt:message key="record_admin_list_start"/></b>
-        <p><input type="text" name="start_time"  size="10" placeholder="hh:mm:ss" required/></p>
+        <p><input type="text" name="start_time" size="10" placeholder="<fmt:message key="record.pattern_time"/>" required/></p>
 
         <p><input type="submit" value="<fmt:message key="record_user_button_record"/>" /></p>
     </form>

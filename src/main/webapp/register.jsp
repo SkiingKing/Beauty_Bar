@@ -292,8 +292,8 @@
 
            <!-- Locale -->
            <div id="formFooter">
-               <a href="register.jsp?sessionLocale=en"><fmt:message key="english" /></a>
-               <a href="register.jsp?sessionLocale=ua"><fmt:message key="ukrainian" /></a>
+               <input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='register.jsp?sessionLocale=ua'">
+               <input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='register.jsp?sessionLocale=en'">
            </div>
 
        </div>
