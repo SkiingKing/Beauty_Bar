@@ -23,14 +23,15 @@
     </filter>
 
     <servlet>
-        <servlet-name>master</servlet-name>
+        <servlet-name>sort</servlet-name>
         <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>master</servlet-name>
-        <url-pattern>/master</url-pattern>
+        <servlet-name>sort</servlet-name>
+        <url-pattern>/sort</url-pattern>
     </servlet-mapping>
+
 
     <servlet>
         <servlet-name>services</servlet-name>
@@ -40,6 +41,16 @@
     <servlet-mapping>
         <servlet-name>services</servlet-name>
         <url-pattern>/services</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>master</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>master</servlet-name>
+        <url-pattern>/master</url-pattern>
     </servlet-mapping>
 
     <servlet>

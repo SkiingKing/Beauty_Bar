@@ -29,7 +29,7 @@ public class SortCommand implements Command{
 
         //sorting by name of sort
         switch (sort){
-            case "For the master":
+            case "For the master","За майстром":
                 Collections.sort(masters_2, new Comparator() {
                     @Override
                     public int compare(Object one, Object two) {
@@ -40,7 +40,7 @@ public class SortCommand implements Command{
                 });
                 break;
 
-            case "For the rate":
+            case "For the rate","За рейтингом":
                 Collections.sort(masters_2, new Comparator() {
                     @Override
                     public int compare(Object one, Object two) {
@@ -53,7 +53,7 @@ public class SortCommand implements Command{
 
                 break;
 
-            case "For the service":
+            case "For the service","за сервісом":
                 Collections.sort(masters_2, new Comparator() {
                     @Override
                     public int compare(Object one, Object two) {

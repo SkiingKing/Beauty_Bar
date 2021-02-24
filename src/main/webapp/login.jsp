@@ -1,5 +1,14 @@
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<%@ page isELIgnored="false" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<%@ page session="true" %>
+
+<html lang="${sessionScope.lang}">
 <html>
 <head>
     <title>LOGIN</title>
@@ -278,14 +287,16 @@
 
                 <!-- Login Form -->
                 <form method="post" action="controller?action=login">
-                    <input type="text" id="email" class="fadeIn second" name="email"  placeholder="email" required/>
-                    <input type="text" name="password" id="password" class="fadeIn third" name="login" placeholder="password" required>
-                    <input type="submit" class="fadeIn fourth" value="Login">
+                    <input type="text" id="email" class="fadeIn second" name="email"  placeholder="<fmt:message key="register.email"/>" required/>
+                    <input type="text" name="password" id="password" class="fadeIn third" name="login" placeholder="<fmt:message key="register.password"/>" required>
+                    <input type="submit" class="fadeIn fourth" value="<fmt:message key="header.login"/>">
                 </form>
 
-                <!-- Remind Passowrd -->
+                <!-- Sign up -->
                 <div id="formFooter">
-                    <a class="underlineHover" href="#">Forgot Password?</a>
+                    <a class="underlineHover" href="register.jsp"><fmt:message key="header.register"/></a>
+                    <a href="login.jsp?sessionLocale=en"><fmt:message key="english" /></a>
+                    <a href="login.jsp?sessionLocale=ua"><fmt:message key="ukrainian" /></a>
                 </div>
 
             </div>

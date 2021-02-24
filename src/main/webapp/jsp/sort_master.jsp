@@ -7,6 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<%@ page isELIgnored="false" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<%@ page session="true" %>
+<html lang="${sessionScope.lang}">
 <html>
 <head>
     <title>Title</title>
@@ -66,57 +74,70 @@
 <div id="container">
     <div id="header">BeautyBar</div>
     <div id ="head_right">
-        <a href="../register.jsp">Register</a>
-        <a href="../login.jsp">Login</a>
-        <a href="controller?action=logout">Logout</a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="register.jsp"><fmt:message key="header.register"/></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.jsp"><fmt:message key="header.login"/></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="controller?action=logout"><fmt:message key="header.logout"/></a>
+            </li>
+
+            <li><a href="sort?action=sort&sort=sort&sessionLocale=en"><fmt:message key="english" /></a></li>
+            <li><a href="sort?action=sort&sort=sort&sessionLocale=ua"><fmt:message key="ukrainian" /></a></li>
+        </ul>
     </div>
 
     <div id="sidebar">
         <div id="menu">
-            <a class="nav-link active" href="main.jsp">Main</a>
-            <a class="nav-link" onclick="location.href='master?action=master'">Masters</a>
-            <a class="nav-link" onclick="location.href='services?action=service'">Services</a>
-            <a class="nav-link" href="xx.jsp">Response</a>
+            <a class="nav-link active" href="main.jsp"><fmt:message key="menu.main"/></a>
+            <a class="nav-link" onclick="location.href='master?action=master'"><fmt:message key="menu.masters"/></a>
+            <a class="nav-link" onclick="location.href='services?action=service'"><fmt:message key="menu.services"/></a>
+            <a class="nav-link" href="xx.jsp"><fmt:message key="menu.response"/></a>
             <c:choose>
                 <%--===========================================================================
                                This way we define the USER MENU.
                  ===========================================================================--%>
 
                 <c:when test="${userRole.name == 'user' }">
-                    <a class="nav-link" href="select.jsp">Record</a>
+                    <a class="nav-link" href="select.jsp"><fmt:message key="menu.record"/></a>
                 </c:when>
 
                 <%--===========================================================================
                 This way we define the Master MENU.
                 ===========================================================================--%>
                 <c:when test="${userRole.name == 'master' }">
-                    <a class="nav-link" onclick="location.href='master_timetable?action=master_timetable'">Time table</a>
+                    <a class="nav-link" onclick="location.href='master_timetable?action=master_timetable'"><fmt:message key="menu.timetable"/></a>
                 </c:when>
 
                 <%--===========================================================================
                 This way we define the Admin MENU.
                 ===========================================================================--%>
                 <c:when test="${userRole.name == 'admin'}">
-                    <a class="nav-link" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'">Admin list</a>
+                    <a class="nav-link" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=10'"><fmt:message key="menu.admin_list"/></a>
                 </c:when>
             </c:choose>
+
+
         </div>
     </div>
+
 
 
 
     <div id="content">
 
         <form method="post" action="controller?action=sort">
-            <b>Service</b>
             <select size="5" name="sort" required>
-                <option disabled>Select sorting</option>
-                <option>For the master</option>
-                <option>For the rate</option>
-                <option>For the service</option>
+                <option disabled><fmt:message key="master.select_sort"/></option>
+                <option><fmt:message key="master.sort_by_master"/></option>
+                <option><fmt:message key="master.sort_by_rate"/></option>
+                <option><fmt:message key="master.sort_by_service"/></option>
             </select>
 
-            <p><input type="submit" value="Sort" /></p>
+            <p><input type="submit" value="<fmt:message key="master.sort_button"/>" /></p>
         </form>
 
         <div id = "center">
@@ -124,9 +145,9 @@
                 <div class="row col-md-6">
                     <table class="table table-striped table-bordered table-sm">
             <tr>
-                <th>Name and Surname</th>
-                <th>Rate</th>
-                <th>Service</th>
+                <th><fmt:message key="master.name_and_surname"/></th>
+                <th><fmt:message key="master.rate"/></th>
+                <th><fmt:message key="master.service_"/></th>
             </tr>
             <c:forEach var="masters_2" items="${masters_2}">
             <tr>
@@ -142,7 +163,7 @@
             </main>
         </div>
     </div>
-    <div id="footer">instagram:@BeutyBar</div>
+    <div id="footer"><fmt:message key="footer.info"/></div>
 </div>
 </body>
 </html>

@@ -8,6 +8,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<%@ page isELIgnored="false" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<%@ page session="true" %>
+<html lang="${sessionScope.lang}">
 <html>
 <head>
     <title>Title</title>
@@ -23,22 +31,24 @@
 </head>
 </head>
 <body>
-
-<p><a href="../main.jsp">Main</a></p>
-
+<ul>
+    <li><a href="../main.jsp"><fmt:message key="menu.main" /></a></li>
+    <li><a href="record_list?action=admin_list&currentPage=1&recordsPerPage=10&sessionLocale=en"><fmt:message key="english" /></a></li>
+    <li><a href="record_list?action=admin_list&currentPage=1&recordsPerPage=10&sessionLocale=ua"><fmt:message key="ukrainian" /></a></li>
+</ul>
 <div id = "center">
 <main class="m-3">
     <div class="row col-md-6">
         <table class="table table-striped table-bordered table-sm">
     <tr>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Stage</th>
-        <th>Status for admin</th>
-        <th>Start time</th>
-        <th>Ending time</th>
-        <th>Service</th>
-        <th>Master name</th>
+        <th><fmt:message key="record_admin_list_id" /></th>
+        <th><fmt:message key="record_admin_list_date" /></th>
+        <th><fmt:message key="record_admin_list_stage" /></th>
+        <th><fmt:message key="record_admin_list_status" /></th>
+        <th><fmt:message key="record_admin_list_start" /></th>
+        <th><fmt:message key="record_admin_list_end" /></th>
+        <th><fmt:message key="record_admin_list_service" /></th>
+        <th><fmt:message key="record_admin_list_master" /></th>
     </tr>
     <c:forEach var="records" items="${records}">
         <tr>
@@ -51,9 +61,9 @@
             <td>${records.service}</td>
             <td>${records.master_name}</td>
 
-            <td><button onclick="location.href='record_list?action=deleteRecord&recordId=${records.id}'">Delete</button></td>
-            <td><button onclick="location.href='edit_record.jsp'"/>Edit</td>
-            <td><button onclick="location.href='record_list?action=update_admin_status&recordId=${records.id}'">Сalculate</button></td>
+            <td><button onclick="location.href='record_list?action=deleteRecord&recordId=${records.id}'"><fmt:message key="record_admin_list_delete" /></button></td>
+            <td><button onclick="location.href='edit_record.jsp'"/><fmt:message key="record_admin_list_edit" /></td>
+            <td><button onclick="location.href='record_list?action=update_admin_status&recordId=${records.id}'"><fmt:message key="record_admin_list_paid" /></button></td>
         </tr>
     </c:forEach>
 
@@ -63,7 +73,7 @@
         <ul class="pagination">
             <c:if test="${currentPage != 1}">
                 <li class="page-item"><a class="page-link"
-                                         href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}">Previous</a>
+                                         href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}"><fmt:message key="record_admin_list_previous" /></a>
                 </li>
             </c:if>
 
@@ -84,7 +94,7 @@
 
             <c:if test="${currentPage lt noOfPages}">
                 <li class="page-item"><a class="page-link"
-                                         href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}">Next</a>
+                                         href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}"><fmt:message key="record_admin_list_next" /></a>
                 </li>
             </c:if>
         </ul>

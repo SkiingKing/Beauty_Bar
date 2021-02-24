@@ -75,6 +75,7 @@
     <div id ="head_right">
     <ul class="nav justify-content-end">
         <li class="nav-item">
+
             <a class="nav-link active" href="register.jsp"><fmt:message key="header.register"/></a>
         </li>
         <li class="nav-item">
