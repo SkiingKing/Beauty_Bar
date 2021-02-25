@@ -87,6 +87,26 @@
         <url-pattern>/edit</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>add_response</servlet-name>
+        <url-pattern>/add_response</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>add_response</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>response</servlet-name>
+        <url-pattern>/response</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>response</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
     <servlet>
         <servlet-name>edit</servlet-name>
         <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>

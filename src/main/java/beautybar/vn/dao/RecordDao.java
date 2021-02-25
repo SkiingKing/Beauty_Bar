@@ -67,6 +67,9 @@ public class RecordDao extends DBManager {
     private static final String NUMBER_OF_ROWS =
             "SELECT count(record_id) FROM record";
 
+    private static final String FIND_USER_ID_BY_RECORD =
+            "SELECT users_id FROM record WHERE record_id = ?";
+
 
 
     private RecordDao() {
@@ -139,8 +142,6 @@ public class RecordDao extends DBManager {
 
 
 
-
-
     /**
      * Returns all records.
      *
@@ -149,14 +150,14 @@ public class RecordDao extends DBManager {
      * @param recordsPerPage
      */
 
-    public List<Record> getAllRecords(int start,int total){
+    public List<Record> getAllRecords(int currentPage,int recordsPerPage){
         Connection connection = null;
         PreparedStatement statement = null;
         List<Record> list  = new ArrayList<>();
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(GET_ALL_RECORDS_L+(start-1)+","+total);
+            statement = connection.prepareStatement(GET_ALL_RECORDS_L+(currentPage-1)+","+recordsPerPage);
 
             ResultSet rs = statement.executeQuery();
 
@@ -428,6 +429,27 @@ public class RecordDao extends DBManager {
             ex.printStackTrace();
         }
 
+    }
+    public Integer findUserByRecordId(int record_id){
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(FIND_USER_ID_BY_RECORD);
+
+            statement.setInt(1,record_id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                int idd = rs.getInt("users_id");
+                return idd;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

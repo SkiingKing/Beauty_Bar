@@ -61,4 +61,5 @@ public class AdminListCommand implements Command{
 
         return Path.PAGE__ADMIN_LIST;
     }
+
 }

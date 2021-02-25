@@ -28,10 +28,15 @@ public class UserDAO extends DBManager {
             "SELECT MAX(id) FROM users";
     private static final String GET__ALL__USERS =
             "SELECT * FROM users";
+
     private static final String GET__USER =
             "SELECT id,role_role_id FROM users WHERE password = ? AND email = ?";
+
     private static final String FIND_MASTER_BY_EMAIL =
             "SELECT nameandsurname FROM users WHERE email = ?";
+
+    private static final String FIND_USER_BY_ID =
+            "SELECT email FROM users WHERE id = ?";
 
 
     private UserDAO() {
@@ -181,5 +186,34 @@ public class UserDAO extends DBManager {
         }
         return null;
     }
+
+    /**
+     * Return user email by id.
+     * @param id
+     * @return
+     */
+
+    public String findUserEmailById(int id){
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(FIND_USER_BY_ID);
+
+            statement.setInt(1,id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                String email = rs.getString("email");
+                return email;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

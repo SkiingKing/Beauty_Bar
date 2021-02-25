@@ -36,6 +36,8 @@ public class CommandFactory {
         comands.put("select",new SelectCommand());
         comands.put("record", new RecordCommand());
         comands.put("service",new ServiceCommand());
+        comands.put("response",new ResponseCommand());
+        comands.put("add_response",new AddResponseCommand());
 
         //master commands
         comands.put("master_timetable",new TimetableCommand());

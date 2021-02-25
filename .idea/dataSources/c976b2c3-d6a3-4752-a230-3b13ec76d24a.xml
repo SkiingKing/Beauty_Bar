@@ -974,6 +974,8 @@ services_id</ColNames>
       <ColNames>masters_id</ColNames>
       <RefTableName>masters</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="304" parent="286" name="fk_masters_has_services_services1">
       <ColNames>services_id</ColNames>
@@ -1038,6 +1040,8 @@ users_id</ColNames>
       <ColNames>users_id</ColNames>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="317" parent="288" name="id">
       <Position>1</Position>
@@ -1047,156 +1051,178 @@ users_id</ColNames>
     </column>
     <column id="318" parent="288" name="review_text">
       <Position>2</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="319" parent="288" name="data">
+    <column id="319" parent="288" name="date">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="320" parent="288" name="PRIMARY">
+    <column id="320" parent="288" name="users_id">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="321" parent="288" name="name">
+      <Position>5</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="322" parent="288" name="fk_review_users1_idx">
+      <ColNames>users_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="323" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>id
+users_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="321" parent="289" name="role_id">
+    <foreign-key id="324" parent="288" name="fk_review_users1">
+      <ColNames>users_id</ColNames>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="325" parent="289" name="role_id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="322" parent="289" name="role_name">
+    <column id="326" parent="289" name="role_name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <index id="323" parent="289" name="role_name_UNIQUE">
+    <index id="327" parent="289" name="role_name_UNIQUE">
       <ColNames>role_name</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="324" parent="289" name="PRIMARY">
+    <key id="328" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>role_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="325" parent="289" name="role_name_UNIQUE">
+    <key id="329" parent="289" name="role_name_UNIQUE">
       <ColNames>role_name</ColNames>
       <UnderlyingIndexName>role_name_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="326" parent="290" name="id">
+    <column id="330" parent="290" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="327" parent="290" name="name">
+    <column id="331" parent="290" name="name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="328" parent="290" name="price">
+    <column id="332" parent="290" name="price">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="329" parent="290" name="estimat_time">
+    <column id="333" parent="290" name="estimat_time">
       <Position>4</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="330" parent="290" name="PRIMARY">
+    <key id="334" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="331" parent="291" name="services_id">
+    <column id="335" parent="291" name="services_id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="332" parent="291" name="record_record_id">
+    <column id="336" parent="291" name="record_record_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="333" parent="291" name="record_users_id">
+    <column id="337" parent="291" name="record_users_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="334" parent="291" name="fk_services_has_record_services1_idx">
+    <index id="338" parent="291" name="fk_services_has_record_services1_idx">
       <ColNames>services_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="335" parent="291" name="fk_services_has_record_record1_idx">
+    <index id="339" parent="291" name="fk_services_has_record_record1_idx">
       <ColNames>record_record_id
 record_users_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="336" parent="291" name="PRIMARY">
+    <key id="340" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>services_id
 record_record_id
 record_users_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="337" parent="291" name="fk_services_has_record_services1">
+    <foreign-key id="341" parent="291" name="fk_services_has_record_services1">
       <ColNames>services_id</ColNames>
       <RefTableName>services</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="338" parent="291" name="fk_services_has_record_record1">
+    <foreign-key id="342" parent="291" name="fk_services_has_record_record1">
       <ColNames>record_record_id</ColNames>
       <RefTableName>record</RefTableName>
       <RefColNames>record_id</RefColNames>
     </foreign-key>
-    <column id="339" parent="292" name="id">
+    <column id="343" parent="292" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="340" parent="292" name="nameandsurname">
+    <column id="344" parent="292" name="nameandsurname">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="341" parent="292" name="email">
+    <column id="345" parent="292" name="email">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="342" parent="292" name="password">
+    <column id="346" parent="292" name="password">
       <Position>4</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="343" parent="292" name="role_role_id">
+    <column id="347" parent="292" name="role_role_id">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="344" parent="292" name="login_UNIQUE">
+    <index id="348" parent="292" name="login_UNIQUE">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="345" parent="292" name="fk_users_role1_idx">
+    <index id="349" parent="292" name="fk_users_role1_idx">
       <ColNames>role_role_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="346" parent="292" name="PRIMARY">
+    <key id="350" parent="292" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id
 role_role_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="347" parent="292" name="login_UNIQUE">
+    <key id="351" parent="292" name="login_UNIQUE">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>login_UNIQUE</UnderlyingIndexName>
     </key>
-    <foreign-key id="348" parent="292" name="fk_users_role1">
+    <foreign-key id="352" parent="292" name="fk_users_role1">
       <ColNames>role_role_id</ColNames>
       <RefTableName>role</RefTableName>
       <RefColNames>role_id</RefColNames>
