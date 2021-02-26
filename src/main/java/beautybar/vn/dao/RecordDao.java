@@ -179,8 +179,8 @@ public class RecordDao extends DBManager {
                 record.setDate(date);
                 record.setStage(stage);
                 record.setStatus_for_admin(status_for_admin);
-                record.setStarting_time(start_time);
-                record.setEnding_time(ending_time);
+                record.setStarting_time(Time.valueOf(start_time.toLocalTime().minusMinutes(180)));
+                record.setEnding_time(Time.valueOf(ending_time.toLocalTime().minusMinutes(180)));
                 record.setService(service);
                 record.setMaster_name(name_master);
 
@@ -231,8 +231,8 @@ public class RecordDao extends DBManager {
                 record.setDate(date);
                 record.setStage(stage);
                 record.setStatus_for_admin(status_for_admin);
-                record.setStarting_time(start_time);
-                record.setEnding_time(ending_time);
+                record.setStarting_time(Time.valueOf(start_time.toLocalTime().minusMinutes(180)));
+                record.setEnding_time(Time.valueOf(ending_time.toLocalTime().minusMinutes(180)));
                 record.setService(service);
 
 

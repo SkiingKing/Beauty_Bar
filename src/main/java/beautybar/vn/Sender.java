@@ -37,19 +37,19 @@ public class Sender {
         try {
             log.info("Session: "+session);
             Message message = new MimeMessage(session);
-            //от кого
+            //від кого
             log.info("Username: "+username);
             message.setFrom(new InternetAddress(username));
             //кому
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            //тема сообщения
+            //тема
             log.info("Subject: "+subject);
             message.setSubject(subject);
             //текст
             log.info("Text: "+text);
             message.setText(text);
 
-            //отправляем сообщение
+            //відправляєм повідомлення
             Transport.send(message);
         } catch (MessagingException e) {
 

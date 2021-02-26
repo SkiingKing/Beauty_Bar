@@ -295,8 +295,8 @@
                 <!-- Sign up -->
                 <div id="formFooter">
                     <a class="underlineHover" href="register.jsp"><fmt:message key="header.register"/></a>
-                    <p></p><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='login.jsp?sessionLocale=ua'"></p>
-                    <input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='login.jsp?sessionLocale=en'">
+                    <br><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='login.jsp?sessionLocale=ua'">
+                    <input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='login.jsp?sessionLocale=en'"></br>
                 </div>
 
             </div>
