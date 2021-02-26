@@ -93,10 +93,10 @@
 
     <div id="sidebar">
         <div id="menu">
-            <a class="nav-link active" href="main.jsp"><fmt:message key="menu.main"/></a>
+            <a class="nav-link active" href="index.jsp"><fmt:message key="menu.main"/></a>
             <a class="nav-link" onclick="location.href='master?action=master'"><fmt:message key="menu.masters"/></a>
             <a class="nav-link" onclick="location.href='services?action=service'"><fmt:message key="menu.services"/></a>
-            <a class="nav-link" href="xx.jsp"><fmt:message key="menu.response"/></a>
+            <a class="nav-link" href="response?action=response"><fmt:message key="menu.response"/></a>
             <c:choose>
                 <%--===========================================================================
                                This way we define the USER MENU.
@@ -124,9 +124,6 @@
 
         </div>
     </div>
-
-
-
 
     <div id="content">
 
