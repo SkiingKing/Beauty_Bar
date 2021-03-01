@@ -19,7 +19,9 @@ public class UserTest {
         user.setNameAndSurname("Vova Shvets");
         user.setRoleId(1);
 
-        assertEquals(user.getId(), 10);
+        Integer a = 10;
+
+        assertEquals(user.getId(), a);
         assertEquals(user.getEmail(), "svova313@gmail.com");
         assertEquals(user.getPassword(), "1234");
         assertEquals(user.getNameAndSurname(), "Vova Shvets");

@@ -44,7 +44,7 @@
                     This way we define the Master MENU.
                     ===========================================================================--%>
                     <c:when test="${userRole.name == 'master' }">
-                        <li><a href="master_timetable?action=master_timetable"><fmt:message key="menu.timetable"/></a></li>
+                        <li><a href="master_timetable?action=master_timetable&currentPage=${1}&recordsPerPage=5"><fmt:message key="menu.timetable"/></a></li>
                     </c:when>
 
                     <%--===========================================================================

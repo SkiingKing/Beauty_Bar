@@ -28,6 +28,10 @@ public class TimetableCommand implements Command{
         HttpSession session = request.getSession();
         User user = (User) request.getSession().getAttribute("user");
 
+
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+
         DaoFactory factory = DaoFactory.getInstance();
         RecordDao recordDao = factory.getRecordDAO();
         UserDAO userDAO  = factory.getUserDAO();
@@ -35,7 +39,7 @@ public class TimetableCommand implements Command{
         // Find master in BD by email
         List<Record> records;
         String master = userDAO.findMasterByEmail(user.getEmail());
-        records = recordDao.getAllRecordsByMaster(master);
+        records = recordDao.getAllRecordsByMaster(master,currentPage,recordsPerPage);
 
         session.setAttribute("master",master);
 
@@ -48,6 +52,22 @@ public class TimetableCommand implements Command{
 
 
         request.setAttribute("records", records);
+
+        // data for pagination
+        int rows = userDAO.getNumberOfRows();
+        int nOfPages = rows / recordsPerPage;
+
+        if (nOfPages % recordsPerPage > 0) {
+
+            nOfPages++;
+        }
+
+        request.setAttribute("noOfPages", nOfPages);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("recordsPerPage", recordsPerPage);
+
+        session.setAttribute("currentPage",currentPage);
+        session.setAttribute("recordsPerPage",recordsPerPage);
 
         log.debug("Command end!");
         return Path.PAGE__MASTER_TIMETABLE;

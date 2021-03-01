@@ -10,9 +10,19 @@ public class Review {
 
     private Date date;
 
-    private Long user_id;
+    private Integer user_id;
 
     private String Name;
+
+    private String name_of_master;
+
+    public String getName_of_master() {
+        return name_of_master;
+    }
+
+    public void setName_of_master(String name_of_master) {
+        this.name_of_master = name_of_master;
+    }
 
     public String getName() {
         return Name;
@@ -34,7 +44,7 @@ public class Review {
         return date;
     }
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
@@ -50,7 +60,7 @@ public class Review {
         this.date = date;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 }

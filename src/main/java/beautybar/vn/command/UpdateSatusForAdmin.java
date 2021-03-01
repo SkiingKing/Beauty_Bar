@@ -25,6 +25,11 @@ public class UpdateSatusForAdmin implements Command{
     public String execute(HttpServletRequest request) {
 
         log.debug("Command start");
+
+
+        int currentPage = (int) request.getSession().getAttribute("currentPage");
+        int recordsPerPage = (int) request.getSession().getAttribute("recordsPerPage");
+
         String recordId = request.getParameter("recordId");
         log.trace("recordList --> " + recordId);
         int recId=Integer.parseInt(recordId);
@@ -47,6 +52,19 @@ public class UpdateSatusForAdmin implements Command{
 
         request.setAttribute("records",records);
         log.trace("Set the request attribute: records --> " + records);
+
+        // data for pagination
+        Integer rows = recordDao.getNumberOfRows();
+        int nOfPages = rows / recordsPerPage;
+
+        if (nOfPages % recordsPerPage > 0) {
+
+            nOfPages++;
+        }
+
+        request.setAttribute("noOfPages", nOfPages);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("recordsPerPage", recordsPerPage);
 
         log.debug("Command finished");
         return Path.PAGE__ADMIN_LIST;

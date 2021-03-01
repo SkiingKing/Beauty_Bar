@@ -84,12 +84,23 @@ public class RecordCommand implements Command {
 
         if (start.isEmpty()) {
             recordDao.addRecord(record);
-            log.info("No records");
+            log.info("Recording:"+record);
+            log.debug("Command end!");
             return Path.PAGE__MAIN;
         } else
             for (int i = 0; i < start.size(); i++) {
-                if (start_time.equals(start.get(i))) return Path.PAGE__ERROR_PAGE_RECORD;
-                if (ending_time.equals(end.get(i))) return Path.PAGE__ERROR_PAGE_RECORD;
+                if (start_time.equals(start.get(i))) {
+                    errorMessage = "This time employment!!!";
+                    request.setAttribute("errorMessage", errorMessage);
+                    log.error("errorMessage --> " + errorMessage);
+                    return Path.PAGE__ERROR_PAGE;
+                }
+                if (ending_time.equals(end.get(i))) {
+                    errorMessage = "This time employment!!!";
+                    request.setAttribute("errorMessage", errorMessage);
+                    log.error("errorMessage --> " + errorMessage);
+                    return Path.PAGE__ERROR_PAGE;
+                }
 
                 int sa = start_time.toLocalTime().getHour();
                 int en = end.get(i).toLocalTime().getHour();
@@ -98,16 +109,18 @@ public class RecordCommand implements Command {
                 int ens = ending_time.toLocalTime().toSecondOfDay();
                 int egs = end.get(i).toLocalTime().toSecondOfDay();
 
-                if (start_time.before(start.get(i)) && ending_time.before(end.get(i))) {
-                    recordDao.addRecord(record);
-                    log.info("Recorded:" + record);
-                    return Path.PAGE__MAIN;
-                }
+//                if (start_time.before(start.get(i)) && ending_time.before(end.get(i))) {
+//                    recordDao.addRecord(record);
+//                    log.info("Recorded:" + record);
+//                    log.debug("Command end!");
+//                    return Path.PAGE__MAIN;
+//                }
 
                 if (sa == en && sam >= enm) {
                     if (ens - egs >= (int) (temp * 60)) {
                         recordDao.addRecord(record);
                         log.info("Recording:" + record);
+                        log.debug("Command end!");
                         return Path.PAGE__MAIN;
                     } else {
                         errorMessage = "This time employment!!!";
@@ -117,6 +130,6 @@ public class RecordCommand implements Command {
                 }
             }
         log.debug("Command end!");
-        return null;
+        return forward;
     }
 }

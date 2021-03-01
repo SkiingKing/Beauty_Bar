@@ -1,6 +1,8 @@
 package beautybar.vn.servlets.filter;
 
+import beautybar.vn.Path;
 import beautybar.vn.entity.Role;
+import beautybar.vn.entity.User;
 import org.apache.log4j.Logger;
 
 
@@ -37,8 +39,8 @@ public class CommandAccessFilter implements Filter {
 			
 			request.setAttribute("errorMessage", errorMessasge);
 			log.trace("Set the request attribute: errorMessage --> " + errorMessasge);
-			
-			request.getRequestDispatcher("error.jsp")
+
+			request.getRequestDispatcher(Path.PAGE__ERROR_PAGE)
 					.forward(request, response);
 		}
 	}
@@ -46,7 +48,7 @@ public class CommandAccessFilter implements Filter {
 	private boolean accessAllowed(ServletRequest request) {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-		String commandName = request.getParameter("command");
+		String commandName = request.getParameter("action");
 		if (commandName == null || commandName.isEmpty())
 			return false;
 		
@@ -56,7 +58,7 @@ public class CommandAccessFilter implements Filter {
 		HttpSession session = httpRequest.getSession(false);
 		if (session == null) 
 			return false;
-		
+
 		Role userRole = (Role)session.getAttribute("userRole");
 		if (userRole == null)
 			return false;

@@ -43,7 +43,7 @@ public class AuthenticationFilter implements Filter {
     }
 
     private String notifyAccessDenied() {
-        return "<script>" + "alert('You should sign In!');" + "window.location = 'http://localhost:8080/login.jsp';" + "</script>";
+        return "<script>" + "alert('You don`t have a permission!');" + "window.location = 'http://localhost:8080/login.jsp';" + "</script>";
     }
 
 

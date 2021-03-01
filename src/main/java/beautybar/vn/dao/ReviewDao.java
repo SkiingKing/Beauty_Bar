@@ -87,7 +87,7 @@ public class ReviewDao extends DBManager {
                 Long id = rs.getLong("id");
                 String review_text = rs.getString("review_text");
                 Date date = rs.getDate("date");
-                Long user_id = rs.getLong("users_id");
+                Integer user_id = rs.getInt("users_id");
                 String name  = rs.getString("name");
 
                 review.setId(id);

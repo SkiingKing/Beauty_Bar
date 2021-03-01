@@ -12,7 +12,7 @@ public class CommandFactory {
 
     private static CommandFactory factory = new CommandFactory();
 
-    private Map<String, Command> comands = new HashMap<String, Command>();
+    private static Map<String, Command> comands = new HashMap<String, Command>();
 
     private CommandFactory() {
 
@@ -25,7 +25,7 @@ public class CommandFactory {
         return factory;
     }
 
-    {
+   static  {
         // common commands
         comands.put("register", new RegisterCommand());
         comands.put("logout", new LogoutCommand());
@@ -38,11 +38,11 @@ public class CommandFactory {
         comands.put("service",new ServiceCommand());
         comands.put("response",new ResponseCommand());
         comands.put("add_response",new AddResponseCommand());
+        comands.put("master",new MasterCommand());
+        comands.put("sort",new SortCommand());
 
         //master commands
         comands.put("master_timetable",new TimetableCommand());
-        comands.put("master",new MasterCommand());
-        comands.put("sort",new SortCommand());
         comands.put("update_master_status",new UpdateMasterStatus());
 
         //admin commands
@@ -65,5 +65,7 @@ public class CommandFactory {
         Command command = comands.get(action);
         return command;
     }
+
+
 
 }

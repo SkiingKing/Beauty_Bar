@@ -23,7 +23,7 @@ public class UserDAO extends DBManager {
 
 
     private static final String ADD__USER =
-            "INSERT INTO users (email, password, nameandsurname,role_role_id) VALUES (?,?,?,?)";
+            "INSERT INTO users (nameandsurname,email, password,role_role_id) VALUES (?,?,?,?)";
     private static final String MAX_ID =
             "SELECT MAX(id) FROM users";
     private static final String GET__ALL__USERS =
@@ -37,6 +37,8 @@ public class UserDAO extends DBManager {
 
     private static final String FIND_USER_BY_ID =
             "SELECT email FROM users WHERE id = ?";
+    private static final String NUMBER_OF_ROWS =
+            "SELECT count(record_id) FROM record";
 
 
     private UserDAO() {
@@ -65,9 +67,9 @@ public class UserDAO extends DBManager {
             connection = getConnection();
             statement = connection.prepareStatement(ADD__USER);
 
-            statement.setString(1, user.getEmail());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getNameAndSurname());
+            statement.setString(1, user.getNameAndSurname());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPassword());
             statement.setInt(4, user.getRoleId());
 
             resultAdded = statement.executeUpdate();
@@ -103,9 +105,9 @@ public class UserDAO extends DBManager {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name_and_surname");
+                String name = rs.getString("nameandsurname");
                 String password = rs.getString("password");
-                int role = rs.getInt("role");
+                int role = rs.getInt("role_role_id");
 
                 User user = new User();
                 user.setId(id);
@@ -144,19 +146,20 @@ public class UserDAO extends DBManager {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                int id = rs.getInt(1);
-                int role_id = rs.getInt(2);
+                int id = rs.getInt("id");
+                int role_id = rs.getInt("role_role_id");
                 user = new User();
                 user.setId(id);
                 user.setEmail(email);
                 user.setPassword(password);
                 user.setRoleId(role_id);
+                return user;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     /**
@@ -214,6 +217,28 @@ public class UserDAO extends DBManager {
         }
         return null;
     }
+    /**
+     * Return number of record rows.
+     * @return Integer
+     */
+    public Integer getNumberOfRows() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        Integer numOfRows = 0;
 
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(NUMBER_OF_ROWS);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return numOfRows;
+    }
 
 }

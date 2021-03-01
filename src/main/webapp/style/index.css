@@ -45,7 +45,7 @@ a:focus{
               margin-right: auto;
               margin-left: auto;
         }
-      
+
 
       .navbar-default {
     background-color: #D0AE5E;
@@ -206,14 +206,30 @@ a:focus{
     border-radius: 40px;
 }
 
-.btn-custom:hover{
-    background: #282828;
-    color: #fff;
+
+.btn-primary{
+    background-color: #D0AE5E;
+    border-bottom-color:#D0AE5E;
+    color: #D0AE5E;
+    padding: 5px;
+    margin: 5px;
+}
+
+.btn-primaru:hover,
+
+.btn-primary:focus,
+
+.btn-primary:visited{
+
+    background-color: #D0AE5E;
+
+    color: #D0AE5E;
+
 }
 
 footer{
     background: #282828;
-    padding: 60px 0;
+    padding: 50px 0;
 }
 
 

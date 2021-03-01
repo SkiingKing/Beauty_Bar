@@ -7,7 +7,7 @@ public class Path {
     public static final String PAGE__ERROR_PAGE_RECORD = "jsp/error.jsp";
     public static final String PAGE__MASTERS = "jsp/master.jsp";
     public static final String PAGE__SERVICES = "jsp/services.jsp";
-    public static final String PAGE__SELECT = "jsp/select.jsp";
+    public static final String PAGE__SELECT = "select.jsp";
     public static final String PAGE__REGISTER = "register.jsp";
     public static final String PAGE__LOGIN = "login.jsp";
     public static final String PAGE__SORT_MASTER = "jsp/sort_master.jsp";

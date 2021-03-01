@@ -2,13 +2,11 @@ package beautybar.vn.entity;
 
 public class User {
 
-    private long id;
-
+    private Integer id;
 
     private String email;
 
     private String password;
-
 
     private String NameAndSurname;
 
@@ -17,12 +15,6 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String password, int roleId) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.roleId = roleId;
-    }
 
     public String getNameAndSurname() {
         return NameAndSurname;
@@ -32,11 +24,11 @@ public class User {
         NameAndSurname = nameAndSurname;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

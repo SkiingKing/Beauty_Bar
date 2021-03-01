@@ -13,14 +13,8 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
-    <filter>
-        <filter-name>EncodingFilter</filter-name>
-        <filter-class>beautybar.vn.servlets.filter.EncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
+
+
 
     <servlet>
         <servlet-name>sort</servlet-name>
@@ -52,6 +46,18 @@
         <servlet-name>master</servlet-name>
         <url-pattern>/master</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>select</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>select</servlet-name>
+        <url-pattern>/select</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>master_timetable</servlet-name>
@@ -87,6 +93,21 @@
         <url-pattern>/edit</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>edit</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>record</servlet-name>
+        <url-pattern>/record</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>record</servlet-name>
+        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>add_response</servlet-name>
         <url-pattern>/add_response</url-pattern>
@@ -107,10 +128,7 @@
         <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
     </servlet>
 
-    <servlet>
-        <servlet-name>edit</servlet-name>
-        <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
-    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>AdminListCommand</servlet-name>
@@ -122,11 +140,6 @@
         <servlet-class>beautybar.vn.servlets.servlet.Controller</servlet-class>
     </servlet>
 
-    <filter-mapping>
-        <filter-name>EncodingFilter</filter-name>
-        <url-pattern>/WEB-INF/jsp/*</url-pattern>
-        <servlet-name>Controller</servlet-name>
-    </filter-mapping>
 
     <filter>
         <filter-name>utf8filter</filter-name>
@@ -149,7 +162,7 @@
 
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/main</url-pattern>
+        <url-pattern>/login</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -162,5 +175,35 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+<!--    <filter>-->
+<!--        <filter-name>CommandAccessFilter</filter-name>-->
+<!--        <filter-class>beautybar.vn.servlets.filter.CommandAccessFilter</filter-class>-->
+<!--        <init-param>-->
+<!--            <param-name>admin</param-name>-->
+<!--            <param-value>admin_list</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>user</param-name>-->
+<!--            <param-value>record</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>master</param-name>-->
+<!--            <param-value>master_timetable</param-value>-->
+<!--        </init-param>-->
+
+<!--        <init-param>-->
+<!--            <param-name>common</param-name>-->
+<!--            <param-value>logout noCommand viewSettings updateSettings</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>out-of-control</param-name>-->
+<!--            <param-value>login</param-value>-->
+<!--        </init-param>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>CommandAccessFilter</filter-name>-->
+<!--        <servlet-name>Controller</servlet-name>-->
+<!--    </filter-mapping>-->
 
 </web-app>

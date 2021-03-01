@@ -49,9 +49,9 @@ public class RegisterCommand implements Command {
 
         // add data new user
         User user = new User();
+        user.setNameAndSurname(name_and_surname);
         user.setEmail(email);
         user.setPassword(password);
-        user.setNameAndSurname(name_and_surname);
         user.setRoleId(1);
 
         // check if user contains in BD

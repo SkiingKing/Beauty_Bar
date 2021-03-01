@@ -47,7 +47,7 @@ public class RecordDao extends DBManager {
             "SELECT * FROM record WHERE status_for_admin = 0 limit ";
 
     private static final String GET_ALL_RECORDS_BY_MASTER =
-            "SELECT * FROM record WHERE stage = 0 AND master_name=?";
+            "SELECT * FROM record WHERE stage = 0 AND master_name=? limit ";
 
     private static final String FIND_RECORD_BY_ID =
             "SELECT * FROM record WHERE record_id=?";
@@ -70,6 +70,8 @@ public class RecordDao extends DBManager {
     private static final String FIND_USER_ID_BY_RECORD =
             "SELECT users_id FROM record WHERE record_id = ?";
 
+    private static final String FIND_MASTER_BY_RESPONSE =
+            "SELECT master_name FROM record WHERE users_id = ?";
 
 
     private RecordDao() {
@@ -108,7 +110,7 @@ public class RecordDao extends DBManager {
             if (rs.next()) {
 
                 Long record_id = rs.getLong("record_id");
-                Long user_id = rs.getLong("users_id");
+                Integer user_id = rs.getInt("users_id");
                 Date date = rs.getDate("date");
                 boolean stage = rs.getBoolean("stage");
                 boolean status_for_admin = rs.getBoolean("status_for_admin");
@@ -165,7 +167,7 @@ public class RecordDao extends DBManager {
                 Record record = new Record();
 
                 Long record_id = rs.getLong("record_id");
-                Long user_id = rs.getLong("users_id");
+                Integer user_id = rs.getInt("users_id");
                 Date date = rs.getDate("date");
                 boolean stage = rs.getBoolean("stage");
                 boolean status_for_admin = rs.getBoolean("status_for_admin");
@@ -199,14 +201,14 @@ public class RecordDao extends DBManager {
      *
      * @return List of records.
      */
-    public List<Record> getAllRecordsByMaster(String name){
+    public List<Record> getAllRecordsByMaster(String name,int currentPage,int recordsPerPage){
         Connection connection = null;
         PreparedStatement statement = null;
         List<Record> list  = new ArrayList<>();
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(GET_ALL_RECORDS_BY_MASTER);
+            statement = connection.prepareStatement(GET_ALL_RECORDS_BY_MASTER+(currentPage-1)+","+recordsPerPage);
 
             statement.setString(1,name);
 
@@ -217,7 +219,7 @@ public class RecordDao extends DBManager {
                 Record record = new Record();
 
                 Long record_id = rs.getLong("record_id");
-                Long user_id = rs.getLong("users_id");
+                Integer user_id = rs.getInt("users_id");
                 Date date = rs.getDate("date");
                 boolean stage = rs.getBoolean("stage");
                 boolean status_for_admin = rs.getBoolean("status_for_admin");
@@ -420,8 +422,8 @@ public class RecordDao extends DBManager {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(UPDATE_TIMESLOT);
-            statement.setTime(1, start);
-            statement.setTime(2, end);
+            statement.setTime(1, Time.valueOf(start.toLocalTime().plusMinutes(180)));
+            statement.setTime(2, Time.valueOf(end.toLocalTime().plusMinutes(180)));
             statement.setInt(3, id);
             statement.executeUpdate();
         }
@@ -445,6 +447,28 @@ public class RecordDao extends DBManager {
             if (rs.next()) {
                 int idd = rs.getInt("users_id");
                 return idd;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getFindMasterByResponse(int user_id){
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(FIND_MASTER_BY_RESPONSE);
+
+            statement.setInt(1,user_id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                String master_name = rs.getString("master_name");
+                return master_name;
             }
         } catch (SQLException e) {
             e.printStackTrace();

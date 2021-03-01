@@ -17,7 +17,7 @@ public class RecordTest {
         assertNotNull(record);
 
           record.setId(10L);
-          record.setUser_id(2L);
+          record.setUser_id(2);
           record.setDate(Date.valueOf("2021-02-20"));
           record.setStage(false);
           record.setStatus_for_admin(false);
@@ -27,7 +27,7 @@ public class RecordTest {
           record.setMaster_name("Tris");
 
           Long l = 10L;
-          Long li = 2L;
+          Integer li = 2;
           Date date = Date.valueOf("2021-02-20");
           Time start = Time.valueOf("13:00:00");
           Time end = Time.valueOf("14:40:00");

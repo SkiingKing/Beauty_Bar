@@ -9,7 +9,7 @@ public class Record {
 
     private Long id;
 
-    private Long user_id;
+    private Integer user_id;
 
 
     private Date date;
@@ -26,11 +26,11 @@ public class Record {
 
     private String master_name;
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
