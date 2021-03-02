@@ -20,7 +20,7 @@ public class ReviewDao extends DBManager {
             "SELECT * FROM review";
 
     private static final String ADD_REVIEW =
-            "INSERT INTO review(review_text,date,users_id,name) VALUES (?,?,?,?)";
+            "INSERT INTO review(review_text,date,users_id,name,master_name) VALUES (?,?,?,?,?)";
 
 
     private ReviewDao() {
@@ -52,6 +52,7 @@ public class ReviewDao extends DBManager {
             statement.setDate(2,review.getDate());
             statement.setLong(3,review.getUser_id());
             statement.setString(4,review.getName());
+            statement.setString(5,review.getName_of_master());
 
 
             statement.executeUpdate();
@@ -89,12 +90,14 @@ public class ReviewDao extends DBManager {
                 Date date = rs.getDate("date");
                 Integer user_id = rs.getInt("users_id");
                 String name  = rs.getString("name");
+                String master_name  = rs.getString("master_name");
 
                 review.setId(id);
                 review.setText(review_text);
                 review.setDate(date);
                 review.setUser_id(user_id);
                 review.setName(name);
+                review.setName_of_master(master_name);
 
                 list.add(review);
             }

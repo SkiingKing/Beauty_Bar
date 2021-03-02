@@ -66,9 +66,9 @@
 
                     <li><a href="controller?action=logout"><span class="glyphicon glyphicon-log-in"></span><fmt:message key="header.logout"/></a></li>
                 </c:if>
-                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='main.jsp?sessionLocale=ua'"></li>
+                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='index.jsp?sessionLocale=ua'"></li>
 
-                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='main.jsp?sessionLocale=en'"></li>
+                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='index.jsp?sessionLocale=en'"></li>
             </ul>
         </div>
     </nav>
@@ -91,11 +91,11 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="about-desc">
-                    <h2>We care about you at <span>beauty & spa</span></h2>
+                    <h2><fmt:message key="service.label"/> <span><fmt:message key="service.label_2"/> </span></h2>
 
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p><fmt:message key="main.info"/></p>
 
-                    <a href="#" class="btn-custom">Join Now</a>
+                    <a href="master?action=master" class="btn-custom"><fmt:message key="main.info_button"/> </a>
                 </div>
             </div>
 

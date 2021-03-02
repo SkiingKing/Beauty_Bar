@@ -71,16 +71,13 @@
 
                     <li><a href="controller?action=logout"><span class="glyphicon glyphicon-log-in"></span><fmt:message key="header.logout"/></a></li>
                 </c:if>
-                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='main.jsp?sessionLocale=ua'"></li>
+                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='services?action=service&sessionLocale=ua'"></li>
 
-                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='main.jsp?sessionLocale=en'"></li>
+                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='services?action=service&sessionLocale=en'"></li>
             </ul>
         </div>
     </nav>
 </div>
-
-
-
 
 
 <section class="aboutus" id="about">
@@ -88,7 +85,7 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="about-desc">
-                    <h2>We care about you at <span>BeautyBar</span></h2>
+                    <h2><fmt:message key="service.label"/> <span><fmt:message key="service.label_2"/></span></h2>
                     <main class="m-3">
                         <div class="row col-md-6">
                             <table class="table table-striped table-bordered table-sm">

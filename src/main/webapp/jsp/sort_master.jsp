@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style/index.css">
+    <link rel="stylesheet" type="text/css" href="style/master.css">
 </head>
 
 <body>
@@ -71,9 +71,9 @@
 
                     <li><a href="controller?action=logout"><span class="glyphicon glyphicon-log-in"></span><fmt:message key="header.logout"/></a></li>
                 </c:if>
-                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='main.jsp?sessionLocale=ua'"></li>
+                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='master?action=master&sessionLocale=ua'"></li>
 
-                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='main.jsp?sessionLocale=en'"></li>
+                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='master?action=master&sessionLocale=en'"></li>
             </ul>
         </div>
     </nav>
@@ -83,17 +83,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5">
-                <div class="about-des0c">
-                    <p>hbdfjbhsdjfbvkjdfbhvjdbfjvhbkjdfbhvjhsdbfvj
-                        dfljgbdslkfjbgvlkjsjdfbglkjsdbfjgbhadlk
-                        wef;kjenaflkgjvbalekrjghn
-                        ewgojhaekpdkjgnpaoejnva
-                        sdfgoaweedjhnvkawjendevpoiqneafv
-                        wadwkaeo;dfnvg;iwef
-                        awdgvjapweoioedfgnk;awnfvgw
-                        efjaebfvkjaenrvonqeeorvnaowwrnvg;oaenv;olqekjinrg
-                        qwerognqeojnrgpoiqqaehrfngpoaqenrv;lknqeorgv
-                        qwergojadnblkbjbnqaekfgkvn;oakeefbgniko;aejbrg</p>
+                <div class="about-desc">
+                    <h2><fmt:message key="service.label"/> <span><fmt:message key="service.label_2"/></span></h2>
+                    <p><fmt:message key="masters.info_short"/> </p>
+
         <form method="post" action="controller?action=sort">
             <select size="5" name="sort" required>
                 <option disabled><fmt:message key="master.select_sort"/></option>
@@ -122,13 +115,13 @@
                 <td>${masters_2.services}</td>
             </tr>
             </c:forEach>
-        </table>
+
+                    </table>
                 </div>
             </main>
-
+         </div>
         </div>
-            </div>
-        </div>
+    </div>
 </section>
 <footer>
     <div class="container">

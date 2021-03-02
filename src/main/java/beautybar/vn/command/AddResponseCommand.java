@@ -47,8 +47,6 @@ public class AddResponseCommand implements Command{
         review.setName(userDAO.findMasterByEmail(user.getEmail()));
         review.setName_of_master(recordDao.getFindMasterByResponse(user_id));
 
-        session.setAttribute("master_name",recordDao.getFindMasterByResponse(user_id));
-
         log.trace("Review -->"+ review);
 
         // check text
