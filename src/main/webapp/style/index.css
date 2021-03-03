@@ -45,7 +45,11 @@ a:focus{
               margin-right: auto;
               margin-left: auto;
         }
-
+.center{
+    text-align: center;
+    margin-left: 300px;
+    padding: 5px;
+}
 
       .navbar-default {
     background-color: #D0AE5E;

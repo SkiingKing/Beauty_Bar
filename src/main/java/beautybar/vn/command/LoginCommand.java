@@ -36,23 +36,20 @@ public class LoginCommand implements Command {
 
         // check user in BD
         User user = userDAO.getUser(email, password);
-        String resultPage = (user == null) ? Path.PAGE__LOGIN : "controller?action=main";
-
-        // get role
-        Role userRole = Role.getRole(user);
-        session.setAttribute("userRole", userRole);
-        log.trace("Set the session attribute: userRole --> " + userRole);
-
         if (user == null) {
             errorMessage = "User not found,check your email or password!";
             request.setAttribute("errorMessage", errorMessage);
             log.error("errorMessage --> " + errorMessage);
             return forward;
         }else {
+            // get role
+            Role userRole = Role.getRole(user);
+            session.setAttribute("userRole", userRole);
+            log.trace("Set the session attribute: userRole --> " + userRole);
             session.setAttribute("user", user);
         }
 
-        return resultPage;
+        return Path.PAGE__MAIN;
     }
 
 

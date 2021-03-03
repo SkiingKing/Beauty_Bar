@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,11 @@ public class RecordCommand implements Command {
         }
 
         Date date = Date.valueOf(request.getParameter("data"));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        dateFormat.format(date);
+        log.info("Date -->"+date);
+
         if(date == null || !date.toString().matches("\\d*[-]\\d*[-]\\d*")){
             errorMessage = "Field date empty or not correct!";
             request.setAttribute("errorMessage", errorMessage);
@@ -152,77 +158,5 @@ public class RecordCommand implements Command {
 
         }
 
-
-
-//                for(int j=0;j<start.size();j++){
-//                    if(start_time.before(start.get(j))) indecate++;
-//                }
-//                if(indecate == start.size()){
-//                    recordDao.addRecord(record);
-//                    log.info("Recording:" + record);
-//                    log.debug("Command end!");
-//                }
-
-//            try {
-//                if (start_time.toLocalTime().toSecondOfDay() >= end.get(i).toLocalTime().toSecondOfDay()
-//                        && ending_time.toLocalTime().toSecondOfDay() <= end.get(i + 1).toLocalTime().toSecondOfDay()) {
-//                    recordDao.addRecord(record);
-//                    log.info("Recording:" + record);
-//                    log.debug("Command end!");
-//                    return Path.PAGE__MAIN;
-//                }
-//            }catch (NullPointerException ex){
-//                log.error(ex);
-//                errorMessage = "This time employment!!!";
-//                request.setAttribute("errorMessage", errorMessage);
-//                log.error("errorMessage --> " + errorMessage);
-//            }
-//
-//                if((!(start_time_seconds>= start_list_time) && !(start_time_seconds<=end_list_time))||
-//                        (!(start_time_seconds <= start_list_time) && !(end_time_seconds >= start_list_time) &&
-//                                !(end_time_seconds <= end_list_time))){
-//                    recordDao.addRecord(record);
-//                    log.info("Recording:" + record);
-//                    log.debug("Command end!");
-//                    return Path.PAGE__MAIN;
-//                }else{
-//                    errorMessage = "This time employment!!!";
-//                    request.setAttribute("errorMessage", errorMessage);
-//                    log.error("errorMessage --> " + errorMessage);
-//                }
-
-//                if(!(start_time_seconds <= start_list_time) &&
-//                        !(end_time_seconds >= start_list_time) &&
-//                        !(end_time_seconds <= end_list_time)){
-//                    recordDao.addRecord(record);
-//                    log.info("Recording:" + record);
-//                    log.debug("Command end!");
-//                    return Path.PAGE__MAIN;
-//                }else{
-//                        errorMessage = "This time employment!!!";
-//                        request.setAttribute("errorMessage", errorMessage);
-//                        log.error("errorMessage --> " + errorMessage);
-//                }
-
-
-//                if (start_hour == end_hour && start_minute >= end_minute) {
-//                    if (end_seconds_r - end_seconds >= (int) (temp * 60)) {
-//                        recordDao.addRecord(record);
-//                        log.info("Recording:" + record);
-//                        log.debug("Command end!");
-//                        return Path.PAGE__MAIN;
-//                    } else {
-//                        errorMessage = "This time employment!!!";
-//                        request.setAttribute("errorMessage", errorMessage);
-//                        log.error("errorMessage --> " + errorMessage);
-//                    }
-//                }
-//
-//                if (start_time.before(start.get(i)) && ending_time.before(end.get(i))) {
-//                    recordDao.addRecord(record);
-//                    log.info("Recorded:" + record);
-//                    log.debug("Command end!");
-//                    return Path.PAGE__MAIN;
-//                }
             }
 }

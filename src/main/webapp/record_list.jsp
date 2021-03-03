@@ -75,14 +75,18 @@
 
                     <li><a href="controller?action=logout"><span class="glyphicon glyphicon-log-in"></span><fmt:message key="header.logout"/></a></li>
                 </c:if>
-                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='main.jsp?sessionLocale=ua'"></li>
+                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=5&sessionLocale=ua'"></li>
 
-                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='main.jsp?sessionLocale=en'"></li>
+                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=5&sessionLocale=en'"></li>
             </ul>
         </div>
     </nav>
 </div>
-<div id = "center">
+<section class="aboutus" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="about-desc">
 <main class="m-3">
     <div class="row col-md-6">
         <table class="table table-striped table-bordered table-sm">
@@ -108,47 +112,49 @@
             <td>${records.master_name}</td>
 
             <td><button onclick="location.href='record_list?action=deleteRecord&recordId=${records.id}'"><fmt:message key="record_admin_list_delete" /></button></td>
-            <td><button onclick="location.href='edit_record.jsp'"/><fmt:message key="record_admin_list_edit" /></td>
+            <td><button onclick="location.href='edit_time?action=edit_time&recordId=${records.id}&start=${records.starting_time}&end=${records.ending_time}'"/><fmt:message key="record_admin_list_edit" /></td>
             <td><button onclick="location.href='record_list?action=update_admin_status&recordId=${records.id}'"><fmt:message key="record_admin_list_paid" /></button></td>
         </tr>
     </c:forEach>
 
-</table>
+        </table>
+        <nav aria-label="Navigation for records">
+            <ul class="pagination">
+                <c:if test="${currentPage != 1}">
+                    <li class="page-item"><a class="page-link"
+                                             href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}"><fmt:message key="record_admin_list_previous" /></a>
+                    </li>
+                </c:if>
 
-    <nav aria-label="Navigation for records">
-        <ul class="pagination">
-            <c:if test="${currentPage != 1}">
-                <li class="page-item"><a class="page-link"
-                                         href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}"><fmt:message key="record_admin_list_previous" /></a>
-                </li>
-            </c:if>
+                <c:forEach begin="1" end="${noOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <li class="page-item active"><a class="page-link">
+                                    ${i} <span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link"
+                                                     href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
 
-            <c:forEach begin="1" end="${noOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <li class="page-item active"><a class="page-link">
-                                ${i} <span class="sr-only">(current)</span></a>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item"><a class="page-link"
-                                                 href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-
-            <c:if test="${currentPage lt noOfPages}">
-                <li class="page-item"><a class="page-link"
-                                         href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}"><fmt:message key="record_admin_list_next" /></a>
-                </li>
-            </c:if>
-        </ul>
-    </nav>
+                <c:if test="${currentPage lt noOfPages}">
+                    <li class="page-item"><a class="page-link"
+                                             href="record_list?action=admin_list&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}"><fmt:message key="record_admin_list_next" /></a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
     </div>
 </main>
 </div>
 </div>
+</div>
+</div>
+</section>
 
 </body>
 </html>

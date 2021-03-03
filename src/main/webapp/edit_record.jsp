@@ -74,28 +74,39 @@
 
                     <li><a href="controller?action=logout"><span class="glyphicon glyphicon-log-in"></span><fmt:message key="header.logout"/></a></li>
                 </c:if>
-                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='main.jsp?sessionLocale=ua'"></li>
+                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=5&sessionLocale=ua'"></li>
 
-                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='main.jsp?sessionLocale=en'"></li>
+                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='record_list?action=admin_list&currentPage=${1}&recordsPerPage=5&sessionLocale=en'"></li>
             </ul>
         </div>
     </nav>
 </div>
-
+<section class="aboutus" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="about-desc">
+    <main class="m-3">
+        <div class="row col-md-6">
+            <table class="table table-striped table-bordered table-sm">
     <form method="post" action="controller?action=edit">
-        <p><fmt:message key="record_admin_list_id" /></p>
+        <fmt:message key="record_admin_list_id" />
         <input type="text" value="<%=request.getParameter("recordId")%>" name="recordId"/>
-        <p><fmt:message key="record_admin_list_start" /></p>
+        <fmt:message key="record_admin_list_start" />
         <input type="text" value="<%=request.getParameter("start")%>" name="start"/>
-        <p><fmt:message key="record_admin_list_end"/></p>
+       <fmt:message key="record_admin_list_end"/>
         <input type="text" value="<%=request.getParameter("end")%>"  name="end"/>
 
-<%--        <input type="text" value="<%=request.getParameter("recordId")%>"/>--%>
-<%--        <p><input type="text" value="<%=request.getParameter("start")%>" /></p>--%>
-<%--        <p><input type="text" value="<%=request.getParameter("end")%>" /></p>--%>
-        <p><input type="submit" value="Edit" /></p>
+        <p><input type="submit" value="<fmt:message key="record_admin_list_edit"/>"/></p>
     </form>
-
+            </table>
+        </div>
+    </main>
+</div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
 </c:when>

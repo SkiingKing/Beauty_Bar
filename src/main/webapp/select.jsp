@@ -108,8 +108,7 @@
                             <option>${item}</option>
                         </c:forEach>
                 </select>
-                            <p><input type="submit" value="Send" /></p>
-
+                            <p><input type="submit" class="btn btn-warning" value="<fmt:message key="record_user_select"/>  " /></p>
             </form>
                 </div>
             </div>

@@ -40,6 +40,7 @@ public class CommandFactory {
         comands.put("add_response",new AddResponseCommand());
         comands.put("master",new MasterCommand());
         comands.put("sort",new SortCommand());
+        comands.put("edit_time",new GetTimeForEditCommand());
 
         //master commands
         comands.put("master_timetable",new TimetableCommand());

@@ -51,7 +51,7 @@
                     This way we define the Admin MENU.
                     ===========================================================================--%>
                     <c:when test="${userRole.name == 'admin'}">
-                        <li><a href="record_list?action=admin_list&currentPage=${1}&recordsPerPage=10"><fmt:message key="menu.admin_list"/></a></li>
+                        <li><a href="record_list?action=admin_list&currentPage=${1}&recordsPerPage=5"><fmt:message key="menu.admin_list"/></a></li>
                     </c:when>
                 </c:choose>
 

@@ -44,7 +44,7 @@ public class RecordDao extends DBManager {
             "SELECT * FROM record WHERE status_for_admin = 0 limit 10";
 
     private static final String GET_ALL_RECORDS_L =
-            "SELECT * FROM record WHERE status_for_admin = 0 limit ";
+            "SELECT * FROM record WHERE status_for_admin = 0 LIMIT ";
 
     private static final String GET_ALL_RECORDS_BY_MASTER =
             "SELECT * FROM record WHERE stage = 0 AND master_name=? limit ";
@@ -156,12 +156,14 @@ public class RecordDao extends DBManager {
         Connection connection = null;
         PreparedStatement statement = null;
         List<Record> list  = new ArrayList<>();
+       // int start = currentPage * recordsPerPage - recordsPerPage;
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(GET_ALL_RECORDS_L+(currentPage-1)+","+recordsPerPage);
+            statement = connection.prepareStatement(GET_ALL_RECORDS_L+(currentPage * recordsPerPage - recordsPerPage)+", "+recordsPerPage);
 
             ResultSet rs = statement.executeQuery();
+
 
             while (rs.next()) {
                 Record record = new Record();

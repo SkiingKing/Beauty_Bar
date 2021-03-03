@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
+<%@ taglib prefix = "custom" uri = "/WEB-INF/customTag.tld"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
@@ -76,9 +75,9 @@
 
                     <li><a href="controller?action=logout"><span class="glyphicon glyphicon-log-in"></span><fmt:message key="header.logout"/></a></li>
                 </c:if>
-                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='main.jsp?sessionLocale=ua'"></li>
+                <li><input type="image" src="https://img.icons8.com/color/25/000000/ukraine-circular.png" alt="<fmt:message key="ukrainian" />" onclick="location.href='select?action=select&sessionLocale=ua'"></li>
 
-                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='main.jsp?sessionLocale=en'"></li>
+                <li><input type="image" src="images/english.png" alt="<fmt:message key="english" />" onclick="location.href='select?action=select&sessionLocale=en'"></li>
             </ul>
         </div>
     </nav>
@@ -88,7 +87,9 @@
     <div class="container">
         <div class="row">
     <form class="row g-3" method="post" action="controller?action=record">
-        <p><b>Master:</b>
+
+        <h2><custom:Hello message = "Working time: 8:00 - 20:00"/></h2>
+        <p><b><fmt:message key="record_user_master"/></b><p>
             <select class="selectpicker" name="masters" data-style="btn-warning"  required>
                 <option disabled><fmt:message key="record_user"/></option>
                 <option> </option>
@@ -98,21 +99,24 @@
             </select>
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label"><fmt:message key="record_admin_list_date"/></label>
-        <input type="text" name="data" class="form-control" id="inputEmail4"  size="10" placeholder="<fmt:message key="record.pattern_date"/>" required/>
+        <input type="date" name="data" class="form-control" id="inputEmail4"  size="10" placeholder="<fmt:message key="record.pattern_date"/>" required/>
         </div>
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label"><fmt:message key="record_admin_list_start"/></label>
             <input type="text" class="form-control" id="inputPassword4" name="start_time" size="10" placeholder="<fmt:message key="record.pattern_time"/>" required/>
         </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary"><fmt:message key="record_user_button_record"/></button>
-        </div>
+
+           <p><b><button type="submit" class="btn btn-warning"><fmt:message key="response.review.button"/></button></b></p>
+
     </form>
+            <fmt:message key="main.info"/>
         </div>
     </div>
 </section>
 
 <footer>
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
