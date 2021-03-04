@@ -16,10 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class UserDAO extends DBManager {
+public class UserDAO {
     private static UserDAO instance;
-
-    private Set<User> allUsers;
 
 
     private static final String ADD__USER =
@@ -41,9 +39,6 @@ public class UserDAO extends DBManager {
             "SELECT count(record_id) FROM record";
 
 
-    private UserDAO() {
-        allUsers = new HashSet<User>();
-    }
 
     public static UserDAO getInstance() {
         if (instance == null) {
@@ -64,7 +59,7 @@ public class UserDAO extends DBManager {
         int resultAdded = 0;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(ADD__USER);
 
             statement.setString(1, user.getNameAndSurname());
@@ -80,8 +75,11 @@ public class UserDAO extends DBManager {
             user.setId(userId);
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return resultAdded;
     }
@@ -98,7 +96,7 @@ public class UserDAO extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(GET__ALL__USERS);
 
             ResultSet rs = statement.executeQuery();
@@ -116,8 +114,11 @@ public class UserDAO extends DBManager {
                 user.setRoleId(role);
                 users.add(user);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return users;
     }
@@ -137,7 +138,7 @@ public class UserDAO extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(GET__USER);
 
             statement.setString(1,password);
@@ -156,8 +157,11 @@ public class UserDAO extends DBManager {
                 return user;
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return null;
     }
@@ -173,7 +177,7 @@ public class UserDAO extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_MASTER_BY_EMAIL);
 
             statement.setString(1,email);
@@ -184,8 +188,11 @@ public class UserDAO extends DBManager {
                 String master_name = rs.getString("nameandsurname");
                 return master_name;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return null;
     }
@@ -201,7 +208,7 @@ public class UserDAO extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_USER_BY_ID);
 
             statement.setInt(1,id);
@@ -212,8 +219,11 @@ public class UserDAO extends DBManager {
                 String email = rs.getString("email");
                 return email;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return null;
     }
@@ -227,7 +237,7 @@ public class UserDAO extends DBManager {
         Integer numOfRows = 0;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(NUMBER_OF_ROWS);
 
             ResultSet rs = statement.executeQuery();
@@ -235,7 +245,10 @@ public class UserDAO extends DBManager {
                 return rs.getInt(1);
             }
         } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return numOfRows;

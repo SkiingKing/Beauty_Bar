@@ -7,22 +7,15 @@ import beautybar.vn.entity.Services;
 import java.sql.*;
 import java.util.*;
 
-public class ServicesDao extends DBManager {
+public class ServicesDao {
 
     private static ServicesDao instance;
-
-    private Set<Services> allServices;
 
     private static final String SELECT_SERVICES =
             "SELECT * FROM services";
     private static final String FIND_SERVICE =
             "SELECT name FROM services";
 
-
-
-    private ServicesDao() {
-        allServices = new HashSet<Services>();
-    }
 
     public static ServicesDao getInstance() {
         if (instance == null) {
@@ -43,7 +36,7 @@ public class ServicesDao extends DBManager {
         List<Services> list = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(SELECT_SERVICES);
 
             ResultSet rs = statement.executeQuery();
@@ -60,8 +53,11 @@ public class ServicesDao extends DBManager {
 
                 list.add(services);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return list;
@@ -80,7 +76,7 @@ public class ServicesDao extends DBManager {
         List<String> list = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_SERVICE);
 
             ResultSet rs = statement.executeQuery();
@@ -92,8 +88,11 @@ public class ServicesDao extends DBManager {
                 services.setName_of_services(service_name);
                 list.add(service_name);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return list;

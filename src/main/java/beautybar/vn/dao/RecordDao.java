@@ -10,11 +10,9 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.util.*;
 
-public class RecordDao extends DBManager {
+public class RecordDao{
 
     private static RecordDao instance;
-
-    private Set<Record> allrecord;
 
 
     private static final String ADD__RECORD =
@@ -74,9 +72,6 @@ public class RecordDao extends DBManager {
             "SELECT master_name FROM record WHERE users_id = ?";
 
 
-    private RecordDao() {
-        allrecord = new HashSet<Record>();
-    }
 
     public static RecordDao getInstance() {
         if (instance == null) {
@@ -98,7 +93,7 @@ public class RecordDao extends DBManager {
         Record record = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_RECORD_BY_ID);
 
             statement.setInt(1,id);
@@ -134,12 +129,13 @@ public class RecordDao extends DBManager {
                 return record;
 
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
-
         return record;
-
     }
 
 
@@ -159,7 +155,7 @@ public class RecordDao extends DBManager {
        // int start = currentPage * recordsPerPage - recordsPerPage;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(GET_ALL_RECORDS_L+(currentPage * recordsPerPage - recordsPerPage)+", "+recordsPerPage);
 
             ResultSet rs = statement.executeQuery();
@@ -190,8 +186,11 @@ public class RecordDao extends DBManager {
 
                 list.add(record);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return list;
@@ -209,7 +208,7 @@ public class RecordDao extends DBManager {
         List<Record> list  = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(GET_ALL_RECORDS_BY_MASTER+(currentPage-1)+","+recordsPerPage);
 
             statement.setString(1,name);
@@ -242,8 +241,11 @@ public class RecordDao extends DBManager {
 
                 list.add(record);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return list;
@@ -264,7 +266,7 @@ public class RecordDao extends DBManager {
         List<Time> list = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(START_TIME_BY_MASTER_AND_DATE);
 
             statement.setString(1,master_name);
@@ -279,8 +281,11 @@ public class RecordDao extends DBManager {
                 list.add(time);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return list;
     }
@@ -299,7 +304,7 @@ public class RecordDao extends DBManager {
         List<Time> list = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(ENDING_TIME_BY_MASTER_AND_DATE);
 
             statement.setString(1,master_name);
@@ -314,8 +319,11 @@ public class RecordDao extends DBManager {
                 list.add(time);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return list;
     }
@@ -332,7 +340,7 @@ public class RecordDao extends DBManager {
         HashMap<String,Long> map = new HashMap<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(TIME_BY_SERVICE);
 
             ResultSet rs = statement.executeQuery();
@@ -344,10 +352,12 @@ public class RecordDao extends DBManager {
                 map.put(service,time_in_minute);
 
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
-
         return map;
 
     }
@@ -364,7 +374,7 @@ public class RecordDao extends DBManager {
         long a = 180;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(ADD__RECORD);
 
            statement.setLong(1,record.getUser_id());
@@ -384,8 +394,11 @@ public class RecordDao extends DBManager {
             record.setId(recordID);
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
     }
@@ -400,13 +413,16 @@ public class RecordDao extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(UPDATE_STATUS);
             statement.setInt(1, id);
             statement.executeUpdate();
         }
         catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
     }
@@ -422,7 +438,7 @@ public class RecordDao extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(UPDATE_TIMESLOT);
             statement.setTime(1, Time.valueOf(start.toLocalTime().plusMinutes(180)));
             statement.setTime(2, Time.valueOf(end.toLocalTime().plusMinutes(180)));
@@ -430,7 +446,10 @@ public class RecordDao extends DBManager {
             statement.executeUpdate();
         }
         catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
     }
@@ -439,7 +458,7 @@ public class RecordDao extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_USER_ID_BY_RECORD);
 
             statement.setInt(1,record_id);
@@ -450,8 +469,11 @@ public class RecordDao extends DBManager {
                 int idd = rs.getInt("users_id");
                 return idd;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return null;
     }
@@ -461,7 +483,7 @@ public class RecordDao extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_MASTER_BY_RESPONSE);
 
             statement.setInt(1,user_id);
@@ -472,8 +494,11 @@ public class RecordDao extends DBManager {
                 String master_name = rs.getString("master_name");
                 return master_name;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return null;
     }
@@ -488,13 +513,15 @@ public class RecordDao extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(DELETE_RECORD);
             statement.setInt(1, id);
             statement.executeUpdate();
-        }
-        catch (SQLException ex) {
+        }catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
     }
@@ -508,13 +535,15 @@ public class RecordDao extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(UPDATE_STAGE);
             statement.setInt(1, id);
             statement.executeUpdate();
-        }
-        catch (SQLException ex) {
+        }catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
     }
@@ -529,7 +558,7 @@ public class RecordDao extends DBManager {
         Integer numOfRows = 0;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(NUMBER_OF_ROWS);
 
             ResultSet rs = statement.executeQuery();
@@ -537,7 +566,10 @@ public class RecordDao extends DBManager {
                 return rs.getInt(1);
             }
         } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return numOfRows;

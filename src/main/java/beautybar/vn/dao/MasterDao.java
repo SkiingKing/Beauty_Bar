@@ -11,13 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MasterDao extends DBManager {
+public class MasterDao {
 
     private static MasterDao instance;
-
-    private Set<Master> allMasters;
-
-    private List<String> master_by_service;
 
     private static final String FIND_MASTER =
             "SELECT name,rate,services FROM masters ";
@@ -25,9 +21,7 @@ public class MasterDao extends DBManager {
             "SELECT name FROM masters WHERE services=?";
 
 
-    private MasterDao() {
-        allMasters = new HashSet<Master>();
-    }
+
 
     public static MasterDao getInstance() {
         if (instance == null) {
@@ -47,7 +41,7 @@ public class MasterDao extends DBManager {
         List<Master> list = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_MASTER);
 
             ResultSet rs = statement.executeQuery();
@@ -65,8 +59,11 @@ public class MasterDao extends DBManager {
 
                 list.add(master);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return list;
@@ -86,7 +83,7 @@ public class MasterDao extends DBManager {
         List<Master> list = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_MASTER_BY_SERVICE);
 
             statement.setString(1,service);
@@ -104,8 +101,11 @@ public class MasterDao extends DBManager {
 
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return list;
     }

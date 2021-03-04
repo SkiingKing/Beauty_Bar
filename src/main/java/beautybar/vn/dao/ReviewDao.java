@@ -10,11 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ReviewDao extends DBManager {
+public class ReviewDao{
 
     private static ReviewDao instance;
-
-    private Set<Review> allreview;
 
     private static final String ALL_REVIEW =
             "SELECT * FROM review";
@@ -22,10 +20,6 @@ public class ReviewDao extends DBManager {
     private static final String ADD_REVIEW =
             "INSERT INTO review(review_text,date,users_id,name,master_name) VALUES (?,?,?,?,?)";
 
-
-    private ReviewDao() {
-        allreview = new HashSet<Review>();
-    }
 
     public static ReviewDao getInstance() {
         if (instance == null) {
@@ -45,7 +39,7 @@ public class ReviewDao extends DBManager {
         PreparedStatement statement = null;
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(ADD_REVIEW);
 
             statement.setString(1,review.getText());
@@ -58,8 +52,11 @@ public class ReviewDao extends DBManager {
             statement.executeUpdate();
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
     }
@@ -77,7 +74,7 @@ public class ReviewDao extends DBManager {
         List<Review> list  = new ArrayList<>();
 
         try {
-            connection = getConnection();
+            connection = DBManager.getInstance().getConnection();
             statement = connection.prepareStatement(ALL_REVIEW);
 
             ResultSet rs = statement.executeQuery();
@@ -101,8 +98,11 @@ public class ReviewDao extends DBManager {
 
                 list.add(review);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch (SQLException ex) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            ex.printStackTrace();
+        } finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return list;
